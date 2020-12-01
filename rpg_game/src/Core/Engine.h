@@ -14,6 +14,7 @@ public:
 	void Update();
 	void Render();
 	void Clean();
+	void Quit();
 private:
 	Engine();
 	static Engine* s_instance;

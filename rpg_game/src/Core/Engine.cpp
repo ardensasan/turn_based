@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "../Input/InputListener.h"
 Engine* Engine::s_instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
@@ -7,12 +8,12 @@ Engine::Engine() {
 	screenHeight = 576;
 	fullScreen = false;
 	isRunning = false;
+	return;
 }
 
 Engine* Engine::GetInstance() {
 	if (s_instance == nullptr) {
 		s_instance = new Engine();
-
 	}
 	return s_instance;
 }
@@ -36,20 +37,31 @@ void Engine::Init() {
 			}
 		}
 	}
+	return;
 }
 
 void Engine::HandleEvents() {
-
+	InputListener::GetInstance()->Listen();
+	return;
 }
 
 void Engine::Update() {
-
+	return;
 }
 
 void Engine::Render() {
+	return;
+}
 
+void Engine::Quit() {
+	isRunning = false;
+	return;
 }
 
 void Engine::Clean() {
-
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	window = nullptr;
+	renderer = nullptr;
+	return;
 }
