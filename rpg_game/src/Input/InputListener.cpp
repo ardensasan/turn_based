@@ -1,5 +1,4 @@
 #include "InputListener.h"
-#include "../Core/Engine.h"
 InputListener* InputListener::s_instance = nullptr;
 InputListener::InputListener() {
 	return;

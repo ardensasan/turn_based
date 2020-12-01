@@ -1,5 +1,6 @@
 #ifndef INPUTLISTENER_H
 #define INPUTLISTENER_H
+#include "../Core/Engine.h"
 class InputListener
 {
 public:
@@ -9,5 +10,4 @@ private:
 	InputListener();
 	static InputListener* s_instance;
 };
-
 #endif

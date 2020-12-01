@@ -10,6 +10,9 @@ public:
 	static Engine* GetInstance();
 	void Init();
 	inline bool IsRunning() { return isRunning; }
+	inline SDL_Renderer* GetRenderer() { return renderer; }
+	inline int GetScreenWidth() { return screenWidth; }
+	inline int GetScreenHeight() { return screenHeight; }
 	void HandleEvents();
 	void Update();
 	void Render();
