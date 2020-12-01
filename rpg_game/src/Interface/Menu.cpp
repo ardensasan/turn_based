@@ -18,29 +18,33 @@ Menu::Menu() {
 }
 
 void Menu::Update() {
-	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) && !keyPressed) {
+	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) || 
+		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) && 
+		!keyPressed) {
 		currentChoice = currentChoice > 2 ? 0 : currentChoice+1;
 		keyPressed = true;
 	}
-	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_S) && keyPressed) {
+	if ((InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_S)||
+		InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_DOWN))
+		&& keyPressed) {
 		keyPressed = false;
 	}
 
-	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) && !keyPressed) {
+	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
+		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
+		!keyPressed) {
 		currentChoice = currentChoice < 1 ? 3 : currentChoice - 1;
 		keyPressed = true;
 	}
-	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_W) && keyPressed) {
+	if ((InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_W) ||
+		InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_UP)) && 
+		keyPressed) {
 		keyPressed = false;
 	}
 
 	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 		if (currentChoice == 3) //if exit is chosen quit game
 			Engine::GetInstance()->Quit();
-		else {
-			currentChoice = currentChoice < 1 ? 3 : currentChoice - 1;
-			keyPressed = true;
-		}
 	}
 
 	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
