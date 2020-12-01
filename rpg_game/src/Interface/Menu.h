@@ -7,6 +7,7 @@ class Menu
 {
 public:
 	static Menu* GetInstance();
+	void Update();
 	void Render();
 	void Clean();
 private:
@@ -16,6 +17,9 @@ private:
 	int fontSize;
 	std::string fontFile;
 	std::vector<std::string> menuString;
+	std::vector<SDL_Color> colorList;
+	int currentChoice;
+	bool keyPressed;
 };
 #endif
 

@@ -6,8 +6,14 @@ class InputListener
 public:
 	static InputListener* GetInstance();
 	void Listen();
+	bool GetKeyDown(SDL_Scancode key);
+	bool GetKeyUp(SDL_Scancode key);
+	void KeyDown();
+	void KeyUp(SDL_Scancode key);
 private:
 	InputListener();
 	static InputListener* s_Instance;
+	const Uint8* KeyState;
+	SDL_Scancode keyUp;
 };
 #endif

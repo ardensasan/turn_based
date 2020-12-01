@@ -51,6 +51,7 @@ void Engine::HandleEvents() {
 }
 
 void Engine::Update() {
+	Menu::GetInstance()->Update();
 	return;
 }
 
