@@ -8,6 +8,6 @@ public:
 	void Listen();
 private:
 	InputListener();
-	static InputListener* s_instance;
+	static InputListener* s_Instance;
 };
 #endif

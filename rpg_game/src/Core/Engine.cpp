@@ -1,7 +1,7 @@
 #include "Engine.h"
 #include "../Input/InputListener.h"
 #include "../Interface/Menu.h"
-Engine* Engine::s_instance = nullptr;
+Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
 	renderer = nullptr;
@@ -13,10 +13,10 @@ Engine::Engine() {
 }
 
 Engine* Engine::GetInstance() {
-	if (s_instance == nullptr) {
-		s_instance = new Engine();
+	if (s_Instance == nullptr) {
+		s_Instance = new Engine();
 	}
-	return s_instance;
+	return s_Instance;
 }
 
 void Engine::Init() {

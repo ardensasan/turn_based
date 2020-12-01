@@ -1,13 +1,13 @@
 #include "InputListener.h"
-InputListener* InputListener::s_instance = nullptr;
+InputListener* InputListener::s_Instance = nullptr;
 InputListener::InputListener() {
 	return;
 }
 
 InputListener* InputListener::GetInstance() {
-	if (s_instance == nullptr)
-		s_instance = new InputListener();
-	return s_instance;
+	if (s_Instance == nullptr)
+		s_Instance = new InputListener();
+	return s_Instance;
 }
 
 void InputListener::Listen() {

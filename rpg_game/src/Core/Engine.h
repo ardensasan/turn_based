@@ -20,7 +20,7 @@ public:
 	void Quit();
 private:
 	Engine();
-	static Engine* s_instance;
+	static Engine* s_Instance;
 	bool isRunning;
 	SDL_Window* window;
 	SDL_Renderer* renderer;

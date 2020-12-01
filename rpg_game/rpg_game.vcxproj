@@ -146,12 +146,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Engine.h" />
+    <ClInclude Include="src\Core\Timer.h" />
     <ClInclude Include="src\Input\InputListener.h" />
     <ClInclude Include="src\Interface\Menu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
+    <ClCompile Include="src\Core\Timer.cpp" />
     <ClCompile Include="src\Input\InputListener.cpp" />
     <ClCompile Include="src\Interface\Menu.cpp" />
   </ItemGroup>
