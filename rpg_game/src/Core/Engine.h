@@ -13,8 +13,10 @@ public:
 	inline SDL_Renderer* GetRenderer() { return renderer; }
 	inline int GetScreenWidth() { return screenWidth; }
 	inline int GetScreenHeight() { return screenHeight; }
+	bool GetFullScreen() { return fullScreen; }
 	void SetScreenWidth(int width) { screenWidth = width; }
 	void SetScreenHeight(int height) { screenHeight = height; }
+	void SetFullScreen(bool b) { fullScreen = b; }
 	void HandleEvents();
 	void SetMenuState(int i);
 	void Update();

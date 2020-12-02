@@ -6,8 +6,8 @@ Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
 	renderer = nullptr;
-	screenWidth = 1366;
-	screenHeight = 768;
+	screenWidth = 1024;
+	screenHeight = 576;
 	fullScreen = false;
 	isRunning = false;
 	menuState = 1;

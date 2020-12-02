@@ -28,6 +28,7 @@ private:
 	int screenHeight;
 	int screenWidth;
 	bool keyPressed;
+	bool fullScreen;
 };
 #endif
 
