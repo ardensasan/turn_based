@@ -1,14 +1,16 @@
 #include "Engine.h"
 #include "../Input/InputListener.h"
-#include "../Interface/Menu.h"
+#include "../Interface/Menu/MainMenu.h"
+#include "../Interface/Menu/Settings.h"
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
 	renderer = nullptr;
-	screenWidth = 1024;
-	screenHeight = 576;
+	screenWidth = 1366;
+	screenHeight = 768;
 	fullScreen = false;
 	isRunning = false;
+	menuState = 1;
 	return;
 }
 
@@ -40,6 +42,9 @@ void Engine::Init() {
 		}
 		else {
 			isRunning = true;
+			MainMenu::GetInstance();
+			Settings::GetInstance(); // load settings
+			menuState = 1;
 		}
 	}
 	return;
@@ -50,14 +55,31 @@ void Engine::HandleEvents() {
 	return;
 }
 
+void Engine::SetMenuState(int i) {
+	menuState = i;
+}
+
 void Engine::Update() {
-	Menu::GetInstance()->Update();
+	if (menuState == 1)
+		MainMenu::GetInstance()->Update();
+	else if (menuState == 2)
+		Settings::GetInstance()->Update();
+	else if (menuState == 4) { //initialize with new resolution
+		SDL_DestroyWindow(window);
+		SDL_DestroyRenderer(renderer);
+		window = nullptr;
+		renderer = nullptr;
+		Init();
+	}
 	return;
 }
 
 void Engine::Render() {
 	SDL_RenderClear(renderer);
-	Menu::GetInstance()->Render();
+	if (menuState == 1)
+		MainMenu::GetInstance()->Render();
+	if (menuState == 2)
+		Settings::GetInstance()->Render();
 	SDL_RenderPresent(renderer);
 	return;
 }
@@ -72,6 +94,8 @@ void Engine::Clean() {
 	SDL_DestroyRenderer(renderer);
 	window = nullptr;
 	renderer = nullptr;
+	MainMenu::GetInstance()->Clean();
+	Settings::GetInstance()->Clean();
 	SDL_Quit();
 	IMG_Quit();
 	TTF_Quit();

@@ -1,23 +1,24 @@
-#include "Menu.h"
-#include "../Input/InputListener.h"
-Menu* Menu::s_Instance = nullptr;
-Menu* Menu::GetInstance() {
+#include "MainMenu.h"
+#include "../../Input/InputListener.h"
+MainMenu* MainMenu::s_Instance = nullptr;
+MainMenu* MainMenu::GetInstance() {
 	if (s_Instance == nullptr)
-		s_Instance = new Menu();
+		s_Instance = new MainMenu();
 	return s_Instance;
 }
 
-Menu::Menu() {
+MainMenu::MainMenu() {
 	colorList = { {255, 255, 255} , {255, 0, 0} };
-	menuString = { "Continue", "New Game", "Settings", "Exit"};
+	MainMenuString = { "Continue", "New Game", "Settings", "Exit"};
 	fontFile = "Assets/Fonts/Ancient Modern Tales.otf";
 	fontSize = 100;
 	font = TTF_OpenFont(fontFile.c_str(),fontSize);
 	currentChoice = 1;
 	keyPressed = false;
+	return;
 }
 
-void Menu::Update() {
+void MainMenu::Update() {
 	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) || 
 		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) && 
 		!keyPressed) {
@@ -43,8 +44,11 @@ void Menu::Update() {
 	}
 
 	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
-		if (currentChoice == 3) //if exit is chosen quit game
+		if (currentChoice == 3) //exit
 			Engine::GetInstance()->Quit();
+		if (currentChoice == 2) //settings
+			Engine::GetInstance()->SetMenuState(2);
+		keyPressed = true;
 	}
 
 	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
@@ -53,7 +57,7 @@ void Menu::Update() {
 
 }
 
-void Menu::Render() {
+void MainMenu::Render() {
 	int textWidth = 200;
 	int textHeight = 50;
 	int screenWidth = Engine::GetInstance()->GetScreenWidth();
@@ -62,13 +66,13 @@ void Menu::Render() {
 	SDL_Rect rect = { int((screenWidth - textWidth) / 2),int((screenHeight - textHeight) / 2),textWidth,textHeight };
 	std::vector<std::string>::iterator it;
 	int counter = 0;
-	for (it = menuString.begin();it != menuString.end();it++) {
-		if (it == menuString.end() - 1) {
+	for (it = MainMenuString.begin();it != MainMenuString.end();++it) {
+		if (it == MainMenuString.end() - 1) {
 			textWidth /= 2;
 			rect.x = int((screenWidth - textWidth) / 2);
 			rect.w = textWidth;
 		}
-		SDL_Color color = (counter == currentChoice) ? colorList[1] : colorList[0]; // set red color for current choice or white color
+		SDL_Color color = (counter == currentChoice) ? colorList[1] : colorList[0]; // set red color for current choice
 		SDL_Surface* textSurface = TTF_RenderText_Solid(font, it->c_str(), color);
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, textSurface);
 		SDL_RenderCopy(renderer, texture, NULL, &rect);
@@ -79,7 +83,7 @@ void Menu::Render() {
 	}
 }
 
-void Menu::Clean() {
+void MainMenu::Clean() {
 	TTF_CloseFont(font); 
 	font = nullptr;
 }
