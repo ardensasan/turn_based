@@ -4,7 +4,11 @@
 class InputListener
 {
 public:
-	static InputListener* GetInstance();
+	inline static InputListener* GetInstance() {
+		if (s_Instance == nullptr)
+			s_Instance = new InputListener();
+		return s_Instance;
+	}
 	void Listen();
 	bool GetKeyDown(SDL_Scancode key);
 	bool GetKeyUp(SDL_Scancode key);

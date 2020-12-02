@@ -8,8 +8,12 @@
 class Settings
 {
 public:
-	static Settings* GetInstance();
-	void SetCurrentChoice(int i);
+	inline static Settings* GetInstance() {
+		if (s_Instance == nullptr) {
+			s_Instance = new Settings();
+		}
+		return s_Instance;
+	}
 	void Update();
 	void Render();
 	void Clean();

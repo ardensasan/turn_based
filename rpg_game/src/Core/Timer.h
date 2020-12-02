@@ -4,7 +4,11 @@
 class Timer
 {
 public:
-	static Timer* GetInstance();
+	inline static Timer* GetInstance() {
+		if (s_Instance == nullptr)
+			s_Instance = new Timer();
+		return s_Instance;
+	}
 	void Delay();
 private:
 	Timer();

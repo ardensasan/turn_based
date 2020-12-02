@@ -6,7 +6,11 @@
 class MainMenu
 {
 public:
-	static MainMenu* GetInstance();
+	inline static MainMenu* GetInstance() {
+		if (s_Instance == nullptr)
+			s_Instance = new MainMenu();
+		return s_Instance;
+	}
 	void ReInitialize(); //reinitialize values
 	void Update();
 	void Render();

@@ -6,12 +6,7 @@ const int FRAMEDELAY = 1000 / FPS;
 Timer::Timer() {
 	frameTime = 0;
 	frameStart = 0;
-}
-
-Timer* Timer::GetInstance() {
-	if (s_Instance == nullptr)
-		s_Instance = new Timer();
-	return s_Instance;
+	return;
 }
 
 void Timer::Delay() {
@@ -20,4 +15,5 @@ void Timer::Delay() {
 		SDL_Delay(FRAMEDELAY - frameTime);
 	}
 	frameStart = SDL_GetTicks();
+	return;
 }

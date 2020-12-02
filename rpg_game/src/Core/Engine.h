@@ -7,7 +7,12 @@
 class Engine
 {
 public:
-	static Engine* GetInstance();
+	inline static Engine* GetInstance() {
+		if (s_Instance == nullptr) {
+			s_Instance = new Engine();
+		}
+		return s_Instance;
+	}
 	void Init();
 	inline bool IsRunning() { return isRunning; }
 	inline SDL_Renderer* GetRenderer() { return renderer; }

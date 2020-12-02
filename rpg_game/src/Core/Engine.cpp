@@ -15,13 +15,6 @@ Engine::Engine() {
 	return;
 }
 
-Engine* Engine::GetInstance() {
-	if (s_Instance == nullptr) {
-		s_Instance = new Engine();
-	}
-	return s_Instance;
-}
-
 void Engine::Init() {
 	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
@@ -58,6 +51,7 @@ void Engine::HandleEvents() {
 
 void Engine::SetMenuState(int i) {
 	menuState = i;
+	return;
 }
 
 void Engine::Update() {

@@ -1,11 +1,6 @@
 #include "Settings.h"
 #include "../../Input/InputListener.h"
 Settings* Settings::s_Instance = nullptr;
-Settings* Settings::GetInstance() {
-	if (s_Instance == nullptr)
-		s_Instance = new Settings();
-	return s_Instance;
-}
 
 Settings::Settings() {
 	screenHeight = screenWidth = 0;

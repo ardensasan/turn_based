@@ -4,12 +4,6 @@ InputListener::InputListener() {
 	return;
 }
 
-InputListener* InputListener::GetInstance() {
-	if (s_Instance == nullptr)
-		s_Instance = new InputListener();
-	return s_Instance;
-}
-
 void InputListener::Listen() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
@@ -26,6 +20,7 @@ void InputListener::Listen() {
 				break;
 		}
 	}
+	return;
 }
 
 bool InputListener::GetKeyDown(SDL_Scancode key) {
@@ -44,8 +39,10 @@ bool InputListener::GetKeyUp(SDL_Scancode key) {
 
 void InputListener::KeyDown() {
 	KeyState = SDL_GetKeyboardState(NULL);
+	return;
 }
 
 void InputListener::KeyUp(SDL_Scancode key) {
 	keyUp = key;
+	return;
 }

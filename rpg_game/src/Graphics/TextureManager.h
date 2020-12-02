@@ -7,7 +7,11 @@
 class TextureManager
 {
 public:
-	static TextureManager* GetInstance();
+	inline static TextureManager* GetInstance() {
+		if (s_Instance == nullptr)
+			s_Instance = new TextureManager();
+		return s_Instance;
+	}
 	void LoadTexture(std::string id, std::string filename);
 	void Draw();
 	void Clean();

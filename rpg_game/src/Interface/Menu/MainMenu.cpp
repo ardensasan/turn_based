@@ -1,12 +1,6 @@
 #include "MainMenu.h"
 #include "../../Input/InputListener.h"
 MainMenu* MainMenu::s_Instance = nullptr;
-MainMenu* MainMenu::GetInstance() {
-	if (s_Instance == nullptr)
-		s_Instance = new MainMenu();
-	return s_Instance;
-}
-
 MainMenu::MainMenu() {
 	colorList = { {255, 255, 255} , {255, 0, 0} };
 	MainMenuString = { "Continue", "New Game", "Settings", "Exit"};
@@ -54,7 +48,7 @@ void MainMenu::Update() {
 	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
 		keyPressed = false;
 	}
-
+	return;
 }
 
 void MainMenu::Render() {
@@ -81,9 +75,11 @@ void MainMenu::Render() {
 		SDL_FreeSurface(textSurface);
 		counter++;
 	}
+	return;
 }
 
 void MainMenu::Clean() {
 	TTF_CloseFont(font); 
 	font = nullptr;
+	return;
 }
