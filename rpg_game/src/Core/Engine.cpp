@@ -2,6 +2,7 @@
 #include "../Input/InputListener.h"
 #include "../Interface/Menu/MainMenu.h"
 #include "../Interface/Menu/Settings.h"
+#include "../Graphics/TextureManager.h"
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
@@ -80,6 +81,7 @@ void Engine::Render() {
 		MainMenu::GetInstance()->Render();
 	if (menuState == 2)
 		Settings::GetInstance()->Render();
+	TextureManager::GetInstance()->Draw();
 	SDL_RenderPresent(renderer);
 	return;
 }
@@ -96,6 +98,7 @@ void Engine::Clean() {
 	renderer = nullptr;
 	MainMenu::GetInstance()->Clean();
 	Settings::GetInstance()->Clean();
+	TextureManager::GetInstance()->Clean();
 	SDL_Quit();
 	IMG_Quit();
 	TTF_Quit();
