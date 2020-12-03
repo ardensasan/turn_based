@@ -90,7 +90,7 @@ void Settings::Update() {
 	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 		if (currentChoice == settingStrings.size()-1) { //back
 			if (resolutions[resolutionChoice][0] != screenWidth || fullScreen != Engine::GetInstance()->GetFullScreen()) {
-				Engine::GetInstance()->SetMenuState(4); //change resolution
+				Engine::GetInstance()->SetGameState(4); //change resolution
 				screenWidth = resolutions[resolutionChoice][0];
 				screenHeight = resolutions[resolutionChoice][1];
 				Engine::GetInstance()->SetScreenWidth(screenWidth);
@@ -99,7 +99,7 @@ void Settings::Update() {
 				Engine::GetInstance()->SetFullScreen(fullScreen);
 			}
 			else {
-				Engine::GetInstance()->SetMenuState(1);
+				Engine::GetInstance()->SetGameState(1); //main menu
 			}
 			currentChoice = 0;
 		}

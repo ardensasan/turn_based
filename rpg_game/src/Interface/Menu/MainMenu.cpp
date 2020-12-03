@@ -38,10 +38,12 @@ void MainMenu::Update() {
 	}
 
 	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
-		if (currentChoice == 3) //exit
+		if(currentChoice == 1)
+			Engine::GetInstance()->SetGameState(0); // new game
+		else if (currentChoice == 2) //settings
+			Engine::GetInstance()->SetGameState(2);
+		else if (currentChoice == 3) //exit
 			Engine::GetInstance()->Quit();
-		if (currentChoice == 2) //settings
-			Engine::GetInstance()->SetMenuState(2);
 		keyPressed = true;
 	}
 

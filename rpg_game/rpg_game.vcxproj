@@ -151,6 +151,8 @@
     <ClInclude Include="src\Input\InputListener.h" />
     <ClInclude Include="src\Interface\Menu\MainMenu.h" />
     <ClInclude Include="src\Interface\Menu\Settings.h" />
+    <ClInclude Include="src\Object\GameObject.h" />
+    <ClInclude Include="src\Object\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -160,6 +162,7 @@
     <ClCompile Include="src\Input\InputListener.cpp" />
     <ClCompile Include="src\Interface\Menu\MainMenu.cpp" />
     <ClCompile Include="src\Interface\Menu\Settings.cpp" />
+    <ClCompile Include="src\Object\Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

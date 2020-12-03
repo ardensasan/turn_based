@@ -21,8 +21,7 @@ void TextureManager::LoadTexture(std::string id, std::string filename) {
 }
 
 void TextureManager::Draw() {
-	SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), "Assets/fantasy_weapons_pack1_noglow.png");
-	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), texture, NULL, NULL);
+
 	return;
 }
 

@@ -3,6 +3,8 @@
 #include "../Interface/Menu/MainMenu.h"
 #include "../Interface/Menu/Settings.h"
 #include "../Graphics/TextureManager.h"
+#include "../Object/Player.h"
+Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
@@ -11,14 +13,15 @@ Engine::Engine() {
 	screenHeight = 576;
 	fullScreen = false;
 	isRunning = false;
-	menuState = 1;
+	gameState = 1;
+	pixelSize = 32;
+	SDL_Init(SDL_INIT_VIDEO);
+	IMG_Init(IMG_INIT_PNG);
+	TTF_Init();
 	return;
 }
 
 void Engine::Init() {
-	SDL_Init(SDL_INIT_VIDEO);
-	IMG_Init(IMG_INIT_PNG);
-	TTF_Init();
 	window = SDL_CreateWindow("turn_based_rpg", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, fullScreen ? 1:4);
 	if (window == nullptr) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
@@ -38,7 +41,8 @@ void Engine::Init() {
 			isRunning = true;
 			MainMenu::GetInstance();
 			Settings::GetInstance(); // load settings
-			menuState = 1;
+			player = new Player();
+			gameState = 1;
 		}
 	}
 	return;
@@ -49,17 +53,20 @@ void Engine::HandleEvents() {
 	return;
 }
 
-void Engine::SetMenuState(int i) {
-	menuState = i;
+void Engine::SetGameState(int i) {
+	gameState = i;
 	return;
 }
 
 void Engine::Update() {
-	if (menuState == 1)
+	if (gameState == 0) { // in game
+		player->Update();
+	}
+	else if (gameState == 1) // main menu
 		MainMenu::GetInstance()->Update();
-	else if (menuState == 2)
+	else if (gameState == 2) // settings
 		Settings::GetInstance()->Update();
-	else if (menuState == 4) { //initialize with new resolution
+	else if (gameState == 4) { //initialize with new resolution
 		SDL_DestroyWindow(window);
 		SDL_DestroyRenderer(renderer);
 		window = nullptr;
@@ -71,11 +78,13 @@ void Engine::Update() {
 
 void Engine::Render() {
 	SDL_RenderClear(renderer);
-	if (menuState == 1)
+	if (gameState == 0) {  // in game
+		player->Render();
+	}
+	else if (gameState == 1)  // main menu
 		MainMenu::GetInstance()->Render();
-	if (menuState == 2)
+	else if (gameState == 2)  // settings
 		Settings::GetInstance()->Render();
-	TextureManager::GetInstance()->Draw();
 	SDL_RenderPresent(renderer);
 	return;
 }
