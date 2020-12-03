@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assets>
+	<asset name ="hero1" source ="Assets/Character/Male/Male 01-1.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+	<asset name ="hero2" source ="Assets/Character/Male/Male 01-2.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+	<asset name ="hero3" source ="Assets/Character/Male/Male 01-3.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+	<asset name ="hero4" source ="Assets/Character/Male/Male 01-4.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+
+	<asset name ="fighter1" source ="Assets/Character/Male/Male 02-1.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+	<asset name ="fighter2" source ="Assets/Character/Male/Male 02-2.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+	<asset name ="fighter3" source ="Assets/Character/Male/Male 02-3.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+	<asset name ="fighter4" source ="Assets/Character/Male/Male 02-4.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
+
+</assets>

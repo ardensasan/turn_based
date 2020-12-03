@@ -20,5 +20,6 @@ private:
 	static TextureManager* s_Instance;
 	std::map<std::string, SDL_Texture*> textureMap;
 	int pixelSize;
+	std::string assetList; //list of assets in xml format
 };
 #endif // ! TEXTUREMANAGER_H

@@ -154,6 +154,7 @@
     <ClInclude Include="src\Object\Animation.h" />
     <ClInclude Include="src\Object\GameObject.h" />
     <ClInclude Include="src\Object\Player.h" />
+    <ClInclude Include="src\Vendor\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="src\Interface\Menu\Settings.cpp" />
     <ClCompile Include="src\Object\Animation.cpp" />
     <ClCompile Include="src\Object\Player.cpp" />
+    <ClCompile Include="src\Vendor\tinyxml2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

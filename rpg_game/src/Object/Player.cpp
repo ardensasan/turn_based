@@ -4,7 +4,7 @@
 Player::Player(){
 	xPosition = 0;
 	yPosition = 0;
-	animation = new Animation("player");
+	animation = new Animation("fighter4");
 }
 
 void Player::Update() {

@@ -1,24 +1,46 @@
 #include "TextureManager.h"
 #include "../Core/Engine.h"
+#include "../Vendor/tinyxml2.h"
 TextureManager* TextureManager::s_Instance = nullptr;
-TextureManager::TextureManager() {}
+TextureManager::TextureManager() {
+	pixelSize = 0;
+	assetList = "Assets/assetList.xml";
+}
 
 void TextureManager::LoadTextures() {
-	SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), "Assets/Character/Male/Male 01-1.png");
-	if (!texture) {
+	tinyxml2::XMLDocument xml;
+	xml.LoadFile(assetList.c_str());
+	if (xml.Error()) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-			"Texture Error",
-			"Invalid texture. Please reinstall the program.",
+			"Asset Error",
+			"Error loading asset list. Please reinstall the program.",
 			NULL);
 		Engine::GetInstance()->Quit();
 	}
-	textureMap["player"] = texture;
+	tinyxml2::XMLElement* root = xml.RootElement();
+
+	for (tinyxml2::XMLElement* e = root->FirstChildElement();e != nullptr;e = e->NextSiblingElement()) {
+		if (e->Value() == std::string("asset")) {
+			textureMap[e->Attribute("name")] = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), e->Attribute("source"));
+		}
+	}
+	//return objPropLi
+
+	//SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), "Assets/Character/Male/Male 01-1.png");
+	//if (!texture) {
+	//	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+	//		"Texture Error",
+	//		"Invalid texture. Please reinstall the program.",
+	//		NULL);
+	//	Engine::GetInstance()->Quit();
+	//}
+	//textureMap["player"] = texture;
 	pixelSize = 32;
 	return;
 }
 
 void TextureManager::Draw(int row, int col, int x, int y, std::string textureID) {
-	SDL_Rect srcRect = { row * 32, col * 32, pixelSize, pixelSize };
+	SDL_Rect srcRect = { row * pixelSize, col * pixelSize, pixelSize, pixelSize };
 	SDL_Rect dstRect = { x, y, pixelSize, pixelSize };
 	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), textureMap[textureID],&srcRect, &dstRect);
 	return;
