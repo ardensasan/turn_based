@@ -2,30 +2,34 @@
 #include "../Input/InputListener.h"
 
 Player::Player(){
-	pixelSize = Engine::GetInstance()->GetPixelSize();
-	rect = { 0,0,pixelSize,pixelSize };
+	xPosition = 0;
+	yPosition = 0;
+	animation = new Animation("player");
 }
 
 void Player::Update() {
 	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W)) {
-		rect.y--;
+		animation->UpdateCol(3);
+		yPosition--;
 	}
-	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S)) {
-		rect.y++;
+	else if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S)) {
+		animation->UpdateCol(0);
+		yPosition++;
 	}
-	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_A)) {
-		rect.x--;
+	else if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_A)) {
+		animation->UpdateCol(1);
+		xPosition--;
 	}
-	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_D)) {
-		rect.x++;
+	else if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_D)) {
+		animation->UpdateCol(2);
+		xPosition++;
 	}
+	animation->Update();
 	return;
 }
 
 void Player::Render() {
-	SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), "Assets/Character/Male/Male 01-1.png");
-	SDL_Rect r = { 0,0,32,32 };
-	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), texture, &r, &rect);
+	animation->Render(xPosition, yPosition);
 }
 void Player::Clean() {
 	return;

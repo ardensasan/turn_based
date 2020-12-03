@@ -12,12 +12,13 @@ public:
 			s_Instance = new TextureManager();
 		return s_Instance;
 	}
-	void LoadTexture(std::string id, std::string filename);
-	void Draw();
+	void LoadTextures();
+	void Draw(int row, int col, int x, int y, std::string textureID);
 	void Clean();
 private:
 	TextureManager();
 	static TextureManager* s_Instance;
 	std::map<std::string, SDL_Texture*> textureMap;
+	int pixelSize;
 };
 #endif // ! TEXTUREMANAGER_H

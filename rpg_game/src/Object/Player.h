@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "GameObject.h"
+#include "Animation.h"
 class Player : public GameObject
 {
 public:
@@ -9,8 +10,10 @@ public:
 	void Render();
 	void Clean();
 private:
-	int pixelSize;
 	SDL_Rect rect;
+	Animation* animation;
+	int xPosition;
+	int yPosition;
 };
 #endif
 

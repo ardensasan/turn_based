@@ -3,25 +3,24 @@
 TextureManager* TextureManager::s_Instance = nullptr;
 TextureManager::TextureManager() {}
 
-void TextureManager::LoadTexture(std::string id, std::string filename) {
-	SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(),filename.c_str());
-	if (texture == nullptr) {
+void TextureManager::LoadTextures() {
+	SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), "Assets/Character/Male/Male 01-1.png");
+	if (!texture) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
 			"Texture Error",
-			"Failed to load Texture. Please reinstall the program.",
+			"Invalid texture. Please reinstall the program.",
 			NULL);
 		Engine::GetInstance()->Quit();
 	}
-	else {
-		textureMap[id] = texture;
-		SDL_DestroyTexture(texture);
-		texture = nullptr;
-	}
+	textureMap["player"] = texture;
+	pixelSize = 32;
 	return;
 }
 
-void TextureManager::Draw() {
-
+void TextureManager::Draw(int row, int col, int x, int y, std::string textureID) {
+	SDL_Rect srcRect = { row * 32, col * 32, pixelSize, pixelSize };
+	SDL_Rect dstRect = { x, y, pixelSize, pixelSize };
+	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), textureMap[textureID],&srcRect, &dstRect);
 	return;
 }
 

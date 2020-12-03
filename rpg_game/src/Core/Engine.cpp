@@ -14,7 +14,6 @@ Engine::Engine() {
 	fullScreen = false;
 	isRunning = false;
 	gameState = 1;
-	pixelSize = 32;
 	SDL_Init(SDL_INIT_VIDEO);
 	IMG_Init(IMG_INIT_PNG);
 	TTF_Init();
@@ -41,6 +40,7 @@ void Engine::Init() {
 			isRunning = true;
 			MainMenu::GetInstance();
 			Settings::GetInstance(); // load settings
+			TextureManager::GetInstance()->LoadTextures();
 			player = new Player();
 			gameState = 1;
 		}
