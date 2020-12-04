@@ -2,6 +2,7 @@
 #include "../Core/Engine.h"
 #include "TileParser.h"
 #include "GameMap.h"
+#include <sstream>
 MapParser* MapParser::s_Instance = nullptr;
 
 MapParser::MapParser() {
@@ -38,18 +39,28 @@ void MapParser::Parse(std::string source) {
 		Error();
 	}
 	else {
-		std::vector<Tileset> tilesets;
+		std::vector<Tileset> _tilesets;
 		tinyxml2::XMLElement* root = xml.RootElement();
 		for (tinyxml2::XMLElement* e = root->FirstChildElement();e != nullptr;e = e->NextSiblingElement()) { // get tileset details
 			if (e->Value() == std::string("tileset"))
-				tilesets.push_back(ParseTileSets(e));
+				_tilesets.push_back(ParseTileSets(e));
 		}
-		if (!tilesets.empty()) {
-			TileParser::GetInstance()->tilesets = tilesets;
+		if (!_tilesets.empty()) {
+			TileParser::GetInstance()->tilesets.clear();
+			TileParser::GetInstance()->tilesets = _tilesets;
+			std::vector<Layer> _mapLayers;
 			tinyxml2::XMLElement* root = xml.RootElement();
 			for (tinyxml2::XMLElement* e = root->FirstChildElement();e != nullptr;e = e->NextSiblingElement()) { // get layer matrix
 				if (e->Value() == std::string("layer")) {
+					_mapLayers.push_back(ParseTileLayers(e));
 				}
+			}
+			if (!_mapLayers.empty()) {
+				GameMap::GetInstance()->mapLayers.clear();
+				GameMap::GetInstance()->mapLayers = _mapLayers;
+			}
+			else {
+				Error();
 			}
 		}
 		else {
@@ -58,16 +69,45 @@ void MapParser::Parse(std::string source) {
 	}
 }
 
-Tileset MapParser::ParseTileSets(tinyxml2::XMLElement* e) {
-	Tileset tileset;
-	tileset.firstID = e->Attribute("firstgid") ? atoi(e->Attribute("firstgid")) : NULL;
-	tileset.lastID = e->Attribute("tilecount") ? atoi(e->Attribute("tilecount")) : NULL;
-	tileset.tileWidth = e->Attribute("tilewidth") ? atoi(e->Attribute("tilewidth")) : NULL;
-	tileset.tileHeight = e->Attribute("tileheight") ? atoi(e->Attribute("tileheight")) : NULL;
-	if (!tileset.firstID || !tileset.lastID || !tileset.tileWidth || !tileset.tileHeight)
+Tileset MapParser::ParseTileSets(tinyxml2::XMLElement* tileset) {
+	Tileset _tileset;
+	_tileset.firstID = tileset->Attribute("firstgid") ? atoi(tileset->Attribute("firstgid")) : NULL;
+	_tileset.lastID = tileset->Attribute("tilecount") ? atoi(tileset->Attribute("tilecount")) : NULL;
+	_tileset.tileWidth = tileset->Attribute("tilewidth") ? atoi(tileset->Attribute("tilewidth")) : NULL;
+	_tileset.tileHeight = tileset->Attribute("tileheight") ? atoi(tileset->Attribute("tileheight")) : NULL;
+	if (!_tileset.firstID || !_tileset.lastID || !_tileset.tileWidth || !_tileset.tileHeight)
 		Error();
-	return tileset;
+	return _tileset;
 }
+
+#include <conio.h>
+Layer MapParser::ParseTileLayers(tinyxml2::XMLElement* layer) {
+	Layer _layer;
+	_layer.layerWidth = atoi(layer->Attribute("width"));
+	_layer.layerHeight = atoi(layer->Attribute("height"));
+	_layer.data.resize(_layer.layerWidth, std::vector<int>(_layer.layerHeight));
+	for (tinyxml2::XMLElement* e = layer->FirstChildElement();e!= nullptr;e = e->NextSiblingElement()) {
+		if (e->Value() == std::string("data")) {
+			int x, y;
+			x = y = 0;
+			std::istringstream ss(e->GetText());
+			std::string token;
+			//store into vector
+			while (std::getline(ss, token, ',')) {
+				_layer.data[x][y] = stoi(token);
+				x++;
+				if (x >= _layer.layerWidth) {
+					x = 0;
+					y++;
+				}
+				if (y >= _layer.layerHeight)
+					break;
+			}
+		}
+	}
+	return _layer;
+}
+
 void MapParser::Error() {
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
 		"Map Error",

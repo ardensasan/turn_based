@@ -2,6 +2,7 @@
 #define MAPPARSER_H
 #include <string>
 #include "../Vendor/tinyxml2.h"
+#include "GameMap.h"
 #include "TileParser.h"
 class MapParser
 {
@@ -16,7 +17,8 @@ private:
 	MapParser();
 	void Error();
 	void Parse(std::string source);
-	Tileset ParseTileSets(tinyxml2::XMLElement* e);
+	Tileset ParseTileSets(tinyxml2::XMLElement* ts);
+	Layer ParseTileLayers(tinyxml2::XMLElement* l);
 	static MapParser* s_Instance;
 	std::string mapList;
 };

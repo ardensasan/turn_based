@@ -167,6 +167,7 @@
     <ClCompile Include="src\Input\InputListener.cpp" />
     <ClCompile Include="src\Interface\Menu\MainMenu.cpp" />
     <ClCompile Include="src\Interface\Menu\Settings.cpp" />
+    <ClCompile Include="src\Map\GameMap.cpp" />
     <ClCompile Include="src\Map\MapParser.cpp" />
     <ClCompile Include="src\Map\TileParser.cpp" />
     <ClCompile Include="src\Object\Animation.cpp" />
