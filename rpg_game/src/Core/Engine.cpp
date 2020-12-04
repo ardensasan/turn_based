@@ -4,6 +4,7 @@
 #include "../Interface/Menu/Settings.h"
 #include "../Graphics/TextureManager.h"
 #include "../Object/Player.h"
+#include "../Map/MapParser.h"
 Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
@@ -41,6 +42,7 @@ void Engine::Init() {
 			MainMenu::GetInstance();
 			Settings::GetInstance(); // load settings
 			TextureManager::GetInstance()->LoadTextures();
+			MapParser::GetInstance()->Load("samplemap");
 			player = new Player();
 			gameState = 1;
 		}

@@ -24,17 +24,6 @@ void TextureManager::LoadTextures() {
 			textureMap[e->Attribute("name")] = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), e->Attribute("source"));
 		}
 	}
-	//return objPropLi
-
-	//SDL_Texture* texture = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), "Assets/Character/Male/Male 01-1.png");
-	//if (!texture) {
-	//	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-	//		"Texture Error",
-	//		"Invalid texture. Please reinstall the program.",
-	//		NULL);
-	//	Engine::GetInstance()->Quit();
-	//}
-	//textureMap["player"] = texture;
 	pixelSize = 32;
 	return;
 }

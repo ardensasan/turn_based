@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<maps>
+	<map name ="samplemap" id="samplemap" source="Assets/Maps/samplemap.tmx"></map>
+</maps>

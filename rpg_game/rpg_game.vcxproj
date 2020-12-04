@@ -151,6 +151,9 @@
     <ClInclude Include="src\Input\InputListener.h" />
     <ClInclude Include="src\Interface\Menu\MainMenu.h" />
     <ClInclude Include="src\Interface\Menu\Settings.h" />
+    <ClInclude Include="src\Map\GameMap.h" />
+    <ClInclude Include="src\Map\MapParser.h" />
+    <ClInclude Include="src\Map\TileParser.h" />
     <ClInclude Include="src\Object\Animation.h" />
     <ClInclude Include="src\Object\GameObject.h" />
     <ClInclude Include="src\Object\Player.h" />
@@ -164,6 +167,8 @@
     <ClCompile Include="src\Input\InputListener.cpp" />
     <ClCompile Include="src\Interface\Menu\MainMenu.cpp" />
     <ClCompile Include="src\Interface\Menu\Settings.cpp" />
+    <ClCompile Include="src\Map\MapParser.cpp" />
+    <ClCompile Include="src\Map\TileParser.cpp" />
     <ClCompile Include="src\Object\Animation.cpp" />
     <ClCompile Include="src\Object\Player.cpp" />
     <ClCompile Include="src\Vendor\tinyxml2.cpp" />
