@@ -35,6 +35,17 @@ void TextureManager::Draw(int row, int col, int x, int y, std::string textureID)
 	return;
 }
 
+void TextureManager::DrawTile(std::string id, int row, int col, int width, int height, int srcX, int srcY) {
+	SDL_Rect srcRect = { srcY* 32,srcX * 32,32,32 };
+	SDL_Rect dstRect = { (row * 32),(col * 32),32,32 };
+	SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), textureMap[id], &srcRect, &dstRect, 0, 0, SDL_FLIP_NONE);
+}
+
+
+void TextureManager::DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string textureID) {
+	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), textureMap[textureID], &srcRect, &dstRect);
+	return;
+}
 
 void TextureManager::Clean(){
 	std::map<std::string, SDL_Texture*>::iterator it;

@@ -58,6 +58,7 @@ void MapParser::Parse(std::string source) {
 			if (!_mapLayers.empty()) {
 				GameMap::GetInstance()->mapLayers.clear();
 				GameMap::GetInstance()->mapLayers = _mapLayers;
+				TileParser::GetInstance()->Update();
 			}
 			else {
 				Error();
@@ -72,15 +73,18 @@ void MapParser::Parse(std::string source) {
 Tileset MapParser::ParseTileSets(tinyxml2::XMLElement* tileset) {
 	Tileset _tileset;
 	_tileset.firstID = tileset->Attribute("firstgid") ? atoi(tileset->Attribute("firstgid")) : NULL;
-	_tileset.lastID = tileset->Attribute("tilecount") ? atoi(tileset->Attribute("tilecount")) : NULL;
+	_tileset.tileCount = tileset->Attribute("tilecount") ? atoi(tileset->Attribute("tilecount")) : NULL;
+	_tileset.lastID = _tileset.firstID + _tileset.tileCount - 1;
+	_tileset.colCount = tileset->Attribute("columns") ? atoi(tileset->Attribute("columns")) : NULL;
+	_tileset.rowCount = _tileset.tileCount / _tileset.colCount;
 	_tileset.tileWidth = tileset->Attribute("tilewidth") ? atoi(tileset->Attribute("tilewidth")) : NULL;
 	_tileset.tileHeight = tileset->Attribute("tileheight") ? atoi(tileset->Attribute("tileheight")) : NULL;
-	if (!_tileset.firstID || !_tileset.lastID || !_tileset.tileWidth || !_tileset.tileHeight)
+	_tileset.source = tileset->Attribute("name");
+	if (!_tileset.firstID || !_tileset.lastID || !_tileset.tileCount || !_tileset.colCount || !_tileset.rowCount || !_tileset.tileWidth || !_tileset.tileHeight)
 		Error();
 	return _tileset;
 }
 
-#include <conio.h>
 Layer MapParser::ParseTileLayers(tinyxml2::XMLElement* layer) {
 	Layer _layer;
 	_layer.layerWidth = atoi(layer->Attribute("width"));

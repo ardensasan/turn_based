@@ -16,6 +16,7 @@ public:
 		}
 		return s_Instance;
 	}
+	std::vector<Layer> GetMapLayers() { return mapLayers; }
 private:
 	GameMap();
 	static GameMap* s_Instance;

@@ -5,6 +5,7 @@
 #include "../Graphics/TextureManager.h"
 #include "../Object/Player.h"
 #include "../Map/MapParser.h"
+#include "../Map/TileParser.h"
 Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
@@ -81,6 +82,7 @@ void Engine::Update() {
 void Engine::Render() {
 	SDL_RenderClear(renderer);
 	if (gameState == 0) {  // in game
+		TileParser::GetInstance()->Render();
 		player->Render();
 	}
 	else if (gameState == 1)  // main menu

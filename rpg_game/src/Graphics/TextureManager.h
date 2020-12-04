@@ -14,6 +14,8 @@ public:
 	}
 	void LoadTextures();
 	void Draw(int row, int col, int x, int y, std::string textureID);
+	void DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string textureID);
+	void DrawTile(std::string id, int row, int col, int width, int height, int srcX, int srcY);
 	void Clean();
 private:
 	TextureManager();
