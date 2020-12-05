@@ -9,10 +9,4 @@
 	<asset name ="fighter2" source ="Assets/Character/Male/Male 02-2.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
 	<asset name ="fighter3" source ="Assets/Character/Male/Male 02-3.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
 	<asset name ="fighter4" source ="Assets/Character/Male/Male 02-4.png" imageWidth="96" imageHeight="128" width="32" height="32"></asset>
-
-	<asset name ="[A]WaterFall_pipo" source ="Assets/Maps/Tilesets/[A]WaterFall_pipo.png"></asset>
-	<asset name ="[Base]BaseChip_pipo" source ="Assets/Maps/Tilesets/[Base]BaseChip_pipo.png"></asset>
-	<asset name ="[A]Grass_pipo" source ="Assets/Maps/Tilesets/[A]Grass_pipo.png"></asset>
-	<asset name ="[A]Water_pipo" source ="Assets/Maps/Tilesets/[A]Water_pipo.png"></asset>
-	<asset name ="[A]Flower_pipo" source ="Assets/Maps/Tilesets/[A]Flower_pipo.png"></asset>
 </assets>

@@ -13,6 +13,7 @@ public:
 		return s_Instance;
 	}
 	void LoadTextures();
+	void LoadTileset(std::string name, std::string source);
 	void Draw(int row, int col, int x, int y, std::string textureID);
 	void DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string textureID);
 	void DrawTile(std::string id, int row, int col, int width, int height, int srcX, int srcY);

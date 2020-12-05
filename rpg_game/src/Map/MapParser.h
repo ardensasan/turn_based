@@ -4,6 +4,11 @@
 #include "../Vendor/tinyxml2.h"
 #include "GameMap.h"
 #include "TileParser.h"
+struct MapDetails {
+	int mapWidth, mapHeight;
+	int tileWidth, tileHeight;
+};
+
 class MapParser
 {
 public:
@@ -13,6 +18,7 @@ public:
 		return s_Instance;
 	}
 	void Load(std::string mapID);
+	MapDetails GetMapDetails() { return mapDetails; }
 private:
 	MapParser();
 	void Error();
@@ -21,6 +27,8 @@ private:
 	Layer ParseTileLayers(tinyxml2::XMLElement* l);
 	static MapParser* s_Instance;
 	std::string mapList;
+	MapDetails mapDetails;
+	std::string mapFolder;
 };
 #endif
 

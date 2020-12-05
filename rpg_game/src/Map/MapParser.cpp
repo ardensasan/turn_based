@@ -7,6 +7,7 @@ MapParser* MapParser::s_Instance = nullptr;
 
 MapParser::MapParser() {
 	mapList = "Assets/Maps/maps.xml";
+	mapFolder = "Assets/Maps/";
 }
 
 void MapParser::Load(std::string mapID) {
@@ -41,6 +42,14 @@ void MapParser::Parse(std::string source) {
 	else {
 		std::vector<Tileset> _tilesets;
 		tinyxml2::XMLElement* root = xml.RootElement();
+		if (root->Value() == std::string("map")) { //get map and tile size
+			mapDetails.mapWidth = root->Attribute("width") ? atoi(root->Attribute("width")) : NULL;
+			mapDetails.mapHeight = root->Attribute("height") ? atoi(root->Attribute("height")) : NULL;
+			mapDetails.tileWidth = root->Attribute("tilewidth") ? atoi(root->Attribute("tilewidth")) : NULL;
+			mapDetails.tileHeight = root->Attribute("tileheight") ? atoi(root->Attribute("tileheight")) : NULL;
+			if (!mapDetails.mapWidth || !mapDetails.mapHeight || !mapDetails.tileWidth || !mapDetails.tileHeight)
+				Error();
+		}
 		for (tinyxml2::XMLElement* e = root->FirstChildElement();e != nullptr;e = e->NextSiblingElement()) { // get tileset details
 			if (e->Value() == std::string("tileset"))
 				_tilesets.push_back(ParseTileSets(e));
@@ -79,7 +88,10 @@ Tileset MapParser::ParseTileSets(tinyxml2::XMLElement* tileset) {
 	_tileset.rowCount = _tileset.tileCount / _tileset.colCount;
 	_tileset.tileWidth = tileset->Attribute("tilewidth") ? atoi(tileset->Attribute("tilewidth")) : NULL;
 	_tileset.tileHeight = tileset->Attribute("tileheight") ? atoi(tileset->Attribute("tileheight")) : NULL;
-	_tileset.source = tileset->Attribute("name");
+	_tileset.name = tileset->Attribute("name");
+	tileset = tileset->FirstChildElement();
+	_tileset.source = tileset->Attribute("source");
+	_tileset.source = mapFolder + _tileset.source;
 	if (!_tileset.firstID || !_tileset.lastID || !_tileset.tileCount || !_tileset.colCount || !_tileset.rowCount || !_tileset.tileWidth || !_tileset.tileHeight)
 		Error();
 	return _tileset;

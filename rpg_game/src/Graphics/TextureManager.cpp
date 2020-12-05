@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 #include "../Core/Engine.h"
 #include "../Vendor/tinyxml2.h"
+#include "../Interface/Camera.h"
 TextureManager* TextureManager::s_Instance = nullptr;
 TextureManager::TextureManager() {
 	pixelSize = 0;
@@ -28,9 +29,13 @@ void TextureManager::LoadTextures() {
 	return;
 }
 
+void TextureManager::LoadTileset(std::string name, std::string source) {
+	textureMap[name] = IMG_LoadTexture(Engine::GetInstance()->GetRenderer(), source.c_str());
+}
 void TextureManager::Draw(int row, int col, int x, int y, std::string textureID) {
+	SDL_Rect cameraRect = Camera::GetInstance()->GetCameraRect();
 	SDL_Rect srcRect = { row * pixelSize, col * pixelSize, pixelSize, pixelSize };
-	SDL_Rect dstRect = { x, y, pixelSize, pixelSize };
+	SDL_Rect dstRect = { x - cameraRect.x, y- cameraRect.y, pixelSize, pixelSize };
 	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), textureMap[textureID],&srcRect, &dstRect);
 	return;
 }
@@ -43,6 +48,9 @@ void TextureManager::DrawTile(std::string id, int row, int col, int width, int h
 
 
 void TextureManager::DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string textureID) {
+	SDL_Rect cameraRect = Camera::GetInstance()->GetCameraRect();
+	dstRect.x -= cameraRect.x;
+	dstRect.y -= cameraRect.y;
 	SDL_RenderCopy(Engine::GetInstance()->GetRenderer(), textureMap[textureID], &srcRect, &dstRect);
 	return;
 }

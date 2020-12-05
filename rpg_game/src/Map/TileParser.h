@@ -12,12 +12,13 @@ struct Tileset {
 	int tileWidth;
 	int tileHeight;
 	std::string source;
+	std::string name;
 };
 
 struct Tile {
 	SDL_Rect srcRect;
 	SDL_Rect dstRect;
-	std::string source;
+	std::string name;
 };
 class TileParser
 {

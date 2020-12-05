@@ -6,6 +6,7 @@
 #include "../Object/Player.h"
 #include "../Map/MapParser.h"
 #include "../Map/TileParser.h"
+#include "../Interface/Camera.h"
 Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
@@ -44,6 +45,7 @@ void Engine::Init() {
 			Settings::GetInstance(); // load settings
 			TextureManager::GetInstance()->LoadTextures();
 			MapParser::GetInstance()->Load("samplemap");
+			Camera::GetInstance()->Set();
 			player = new Player();
 			gameState = 1;
 		}
