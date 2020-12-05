@@ -10,25 +10,26 @@ Player::Player(){
 void Player::Update() {
 	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W)) {
 		animation->UpdateCol(3);
-		Camera::GetInstance()->Update(xPosition, yPosition);
+		animation->Update();
 		yPosition--;
 	}
 	else if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S)) {
 		animation->UpdateCol(0);
-		Camera::GetInstance()->Update(xPosition, yPosition);
+		animation->Update();
 		yPosition++;
 	}
 	else if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_A)) {
 		animation->UpdateCol(1);
-		Camera::GetInstance()->Update(xPosition, yPosition);
+		animation->Update();
 		xPosition--;
 	}
 	else if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_D)) {
 		animation->UpdateCol(2);
-		Camera::GetInstance()->Update(xPosition, yPosition);
+		animation->Update();
 		xPosition++;
 	}
-	animation->Update();
+	else 
+		animation->Idle(); // sprite standing still 
 	Camera::GetInstance()->Update(xPosition, yPosition);
 	return;
 }

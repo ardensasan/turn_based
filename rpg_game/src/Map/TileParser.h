@@ -32,6 +32,7 @@ public:
 	}
 	void Update();
 	void Render();
+	void Clean();
 private:
 	TileParser();
 	static TileParser* s_Instance;

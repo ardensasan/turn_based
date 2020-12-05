@@ -17,7 +17,8 @@ public:
 	void Draw(int row, int col, int x, int y, std::string textureID);
 	void DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string textureID);
 	void DrawTile(std::string id, int row, int col, int width, int height, int srcX, int srcY);
-	void Clean();
+	void CleanTilesets(std::string name); // free tilesets from memory
+	void Clean(); // free all assets from memory
 private:
 	TextureManager();
 	static TextureManager* s_Instance;

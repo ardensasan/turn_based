@@ -6,6 +6,7 @@ class Animation
 {
 public:
 	Animation(std::string textureid);
+	void Idle();
 	void Update();
 	void UpdateCol(int col); // set spritesheet
 	void Render(int xPosition, int yPosition);

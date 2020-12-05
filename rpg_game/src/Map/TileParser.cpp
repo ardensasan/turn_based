@@ -5,7 +5,6 @@
 TileParser* TileParser::s_Instance = nullptr;
 TileParser::TileParser() {
 }
-#include <conio.h>
 void TileParser::Update() {
 	tiles.clear();
 	std::vector<Layer> mapLayer = GameMap::GetInstance()->GetMapLayers();
@@ -43,6 +42,13 @@ void TileParser::Render() {
 	std::vector<Tile>::iterator it;
 	for (it = tiles.begin();it != tiles.end();++it) {
 		TextureManager::GetInstance()->DrawTile(it->srcRect, it->dstRect, it->name);
+	}
+}
+
+void TileParser::Clean() {
+	std::vector<Tileset>::iterator tilesetIterator;
+	for (tilesetIterator = tilesets.begin();tilesetIterator != tilesets.end();++tilesetIterator) { // free the memory of tilesets
+		TextureManager::GetInstance()->CleanTilesets(tilesetIterator->name);
 	}
 }
 

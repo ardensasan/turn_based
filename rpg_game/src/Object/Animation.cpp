@@ -9,6 +9,10 @@ Animation::Animation(std::string textureid) {
 	frameRowCount = 3;
 	textureID = textureid;
 }
+void Animation::Idle() {
+	currentFrameRow = 1;
+}
+
 void Animation::UpdateCol(int col) {
 	currentFrameCol = col;
 }

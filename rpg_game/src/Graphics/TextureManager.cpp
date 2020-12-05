@@ -55,6 +55,16 @@ void TextureManager::DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string te
 	return;
 }
 
+void TextureManager::CleanTilesets(std::string name) {
+	std::map<std::string, SDL_Texture*>::iterator it;
+	for (it = textureMap.begin();it != textureMap.end(); ++it) {
+		if (it->first == name)
+			SDL_DestroyTexture(it->second);
+	}
+	textureMap.erase(name);	
+	return;
+}
+
 void TextureManager::Clean(){
 	std::map<std::string, SDL_Texture*>::iterator it;
 	for (it = textureMap.begin();it != textureMap.end(); ++it) {

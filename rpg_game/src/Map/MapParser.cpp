@@ -34,6 +34,7 @@ void MapParser::Load(std::string mapID) {
 }
 
 void MapParser::Parse(std::string source) {
+	TileParser::GetInstance()->Clean(); // clear all loaded tilesets from memory
 	tinyxml2::XMLDocument xml;
 	xml.LoadFile(source.c_str());
 	if (xml.Error()) {
