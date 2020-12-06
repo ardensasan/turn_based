@@ -47,7 +47,6 @@ void Engine::Init() {
 			MapParser::GetInstance()->Load("samplemap");
 			Camera::GetInstance()->Set();
 			player = new Player();
-			gameState = 1;
 		}
 	}
 	return;
@@ -72,11 +71,10 @@ void Engine::Update() {
 	else if (gameState == 2) // settings
 		Settings::GetInstance()->Update();
 	else if (gameState == 4) { //initialize with new resolution
-		SDL_DestroyWindow(window);
-		SDL_DestroyRenderer(renderer);
-		window = nullptr;
-		renderer = nullptr;
-		Init();
+		SDL_SetWindowSize(window, screenWidth, screenHeight);
+		SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+		SDL_SetWindowFullscreen(window, fullScreen ? SDL_WINDOW_FULLSCREEN:0);
+		gameState = 1;
 	}
 	return;
 }
