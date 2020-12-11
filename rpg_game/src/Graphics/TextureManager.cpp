@@ -55,6 +55,16 @@ void TextureManager::DrawTile(SDL_Rect srcRect, SDL_Rect dstRect, std::string te
 	return;
 }
 
+void TextureManager::DrawRect(SDL_Rect rect) {
+	SDL_Rect cameraRect = Camera::GetInstance()->GetCameraRect();
+	rect.x -= cameraRect.x;
+	rect.y -= cameraRect.y;
+	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 255, 255, 255);
+	SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(),&rect);
+	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 0);
+	return;
+}
+
 void TextureManager::CleanTilesets(std::string name) {
 	std::map<std::string, SDL_Texture*>::iterator it;
 	for (it = textureMap.begin();it != textureMap.end(); ++it) {

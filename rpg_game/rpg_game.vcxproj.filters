@@ -57,6 +57,12 @@
     <ClCompile Include="src\Interface\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Interface\Cursor\Cursor.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface\Cursor\Cursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Engine.h">

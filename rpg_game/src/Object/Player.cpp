@@ -2,8 +2,8 @@
 #include "../Input/InputListener.h"
 #include "../Interface/Camera.h"
 Player::Player(){
-	xPosition = 2;
-	yPosition = 2;
+	xPosition = 0;
+	yPosition = 0;
 	animation = new Animation("fighter4");
 }
 
