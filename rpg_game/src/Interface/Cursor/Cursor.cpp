@@ -4,14 +4,18 @@
 #include "../../Graphics/TextureManager.h"
 #include "../../Core/Engine.h"
 #include "../../Map/GameMap.h"
-Cursor::Cursor(int x, int y){
-	cursorRect.x = x;
-	cursorRect.y = y;
-	cursorRect.w = 32;
-	cursorRect.h = 32;
+Cursor* Cursor::s_Instance = nullptr;
+Cursor::Cursor(){
+	position.x = 32;
+	position.y = 32;
 	keyPressed = false;
 	keyPressTimer = 0;
-	pixelSize = 32;
+	selectPressed = false;
+	unitSelected = false;
+}
+void Cursor::SetCursorPosition(int x, int y) {
+	position.x = x;
+	position.y = y;
 }
 
 void Cursor::Update() {
@@ -20,7 +24,7 @@ void Cursor::Update() {
 		!keyPressed) || (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
 		keyPressTimer > 10){
-		cursorRect.y -= cursorRect.y > 0 ? pixelSize : 0;
+		position.y -= position.y > 0 ? TextureManager::GetInstance()->GetPixelSize() : 0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -36,7 +40,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
 		keyPressTimer > 10)
 	{
-		cursorRect.y += cursorRect.y < GameMap::GetInstance()->GetMapHeight()-pixelSize ? pixelSize : 0;
+		position.y += position.y < GameMap::GetInstance()->GetMapHeight()- TextureManager::GetInstance()->GetPixelSize() ? TextureManager::GetInstance()->GetPixelSize() : 0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -51,7 +55,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT)) &&
 		keyPressTimer > 10)
 	{
-		cursorRect.x -= cursorRect.x > 0 ? pixelSize:0;
+		position.x -= position.x > 0 ? TextureManager::GetInstance()->GetPixelSize() :0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -67,7 +71,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT)) &&
 		keyPressTimer > 10)
 	{
-		cursorRect.x += cursorRect.x < GameMap::GetInstance()->GetMapWidth()-pixelSize ? pixelSize : 0;
+		position.x += position.x < GameMap::GetInstance()->GetMapWidth()- TextureManager::GetInstance()->GetPixelSize() ? TextureManager::GetInstance()->GetPixelSize() : 0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -77,11 +81,15 @@ void Cursor::Update() {
 		keyPressed = false;
 		keyPressTimer = 0;
 	}
+
 	keyPressTimer++;
-	Camera::GetInstance()->Update(cursorRect.x, cursorRect.y);
+	Camera::GetInstance()->Update(position.x, position.y);
 	return;
 }
 
+void Cursor::SelectUnit(int x, int y) {
+
+}
 void Cursor::Render() {
-	TextureManager::GetInstance()->DrawRect(cursorRect);
+	TextureManager::GetInstance()->DrawRect(position.x, position.y);
 }

@@ -8,7 +8,6 @@
 #include "../Map/TileParser.h"
 #include "../Interface/Camera.h"
 #include "../Interface/Cursor/Cursor.h"
-Cursor* cursor;
 Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
@@ -49,7 +48,6 @@ void Engine::Init() {
 			MapParser::GetInstance()->Load("samplemap");
 			Camera::GetInstance()->Set();
 			player = new Player();
-			cursor = new Cursor(0, 0);
 		}
 	}
 	return;
@@ -68,7 +66,7 @@ void Engine::SetGameState(int i) {
 void Engine::Update() {
 	if (gameState == 0) { // in game
 		player->Update();
-		cursor->Update();
+		Cursor::GetInstance()->Update();
 	}
 	else if (gameState == 1) // main menu
 		MainMenu::GetInstance()->Update();
@@ -88,7 +86,7 @@ void Engine::Render() {
 	if (gameState == 0) {  // in game
 		TileParser::GetInstance()->Render();
 		player->Render();
-		cursor->Render();
+		Cursor::GetInstance()->Render();
 	}
 	else if (gameState == 1)  // main menu
 		MainMenu::GetInstance()->Render();

@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include "GameObject.h"
 #include "Animation.h"
+#include "Position2D.h"
 class Player : public GameObject
 {
 public:
@@ -10,10 +11,10 @@ public:
 	void Render();
 	void Clean();
 private:
-	SDL_Rect rect;
 	Animation* animation;
-	int xPosition;
-	int yPosition;
+	Position2D position;
+	bool isSelected;
+	bool keyPressed;
 };
 #endif
 

@@ -177,6 +177,7 @@
     <ClCompile Include="src\Map\TileParser.cpp" />
     <ClCompile Include="src\Object\Animation.cpp" />
     <ClCompile Include="src\Object\Player.cpp" />
+    <ClCompile Include="src\Object\Position2D.h" />
     <ClCompile Include="src\Vendor\tinyxml2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

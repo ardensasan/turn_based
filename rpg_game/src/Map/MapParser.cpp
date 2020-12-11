@@ -51,7 +51,6 @@ void MapParser::Parse(std::string source) {
 			mapDetails.tileHeight = root->Attribute("tileheight") ? atoi(root->Attribute("tileheight")) : NULL;
 			if (!mapDetails.mapWidth || !mapDetails.mapHeight || !mapDetails.tileWidth || !mapDetails.tileHeight)
 				Error();
-			std::cout << mapDetails.mapHeight;
 			mapDetails.mapHeight *= mapDetails.tileHeight;
 			mapDetails.mapWidth *= mapDetails.tileWidth;
 			GameMap::GetInstance()->mapDetails = mapDetails;
