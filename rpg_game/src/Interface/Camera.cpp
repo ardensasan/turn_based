@@ -4,7 +4,8 @@ Camera* Camera::s_Instance = nullptr;
 Camera::Camera() {
 	screenWidth = Engine::GetInstance()->GetScreenWidth();
 	screenHeight = Engine::GetInstance()->GetScreenHeight();
-	mapDetails = MapParser::GetInstance()->GetMapDetails();
+	mapDetails = GameMap::GetInstance()->GetMapDetails();
+	cameraRect = { 0, 0, 0, 0 };
 }
 
 void Camera::Set() {
@@ -12,20 +13,18 @@ void Camera::Set() {
 	screenHeight = Engine::GetInstance()->GetScreenHeight();
 	cameraRect.w = screenWidth / 2;
 	cameraRect.h = screenHeight / 2;
-	mapDetails = MapParser::GetInstance()->GetMapDetails();
+	mapDetails = GameMap::GetInstance()->GetMapDetails();
 }
 
 void Camera::Update(int x, int y) {
 	cameraRect.x = x - cameraRect.w;
 	cameraRect.y = y - cameraRect.h;
-	int mapSizeX = mapDetails.mapWidth * mapDetails.tileWidth;
-	int mapSizeY = mapDetails.mapHeight * mapDetails.tileHeight;
-	if (cameraRect.x < 0 && screenWidth < mapSizeX)
+	if (cameraRect.x < 0 && screenWidth < mapDetails.mapWidth)
 		cameraRect.x = 0;
-	if (cameraRect.y < 0 && screenHeight < mapSizeY)
+	if (cameraRect.y < 0 && screenHeight < mapDetails.mapHeight)
 		cameraRect.y = 0;
-	if ((screenWidth + cameraRect.x > mapSizeX) && screenWidth < mapSizeX)
-		cameraRect.x = mapSizeX - screenWidth;
-	if ((screenHeight + cameraRect.y > mapSizeY) && screenHeight < mapSizeY)
-		cameraRect.y = mapSizeY - screenHeight;
+	if ((screenWidth + cameraRect.x > mapDetails.mapWidth) && screenWidth < mapDetails.mapWidth)
+		cameraRect.x = mapDetails.mapWidth - screenWidth;
+	if ((screenHeight + cameraRect.y > mapDetails.mapHeight) && screenHeight < mapDetails.mapHeight)
+		cameraRect.y = mapDetails.mapHeight - screenHeight;
 }

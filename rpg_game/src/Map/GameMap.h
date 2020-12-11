@@ -6,6 +6,13 @@ struct Layer {
 	int layerHeight;
 	std::vector<std::vector<int> > data;
 };
+
+struct MapDetails {
+	int mapWidth, mapHeight;
+	int tileWidth, tileHeight;
+};
+
+
 class GameMap 
 {
 	friend class MapParser;
@@ -17,9 +24,13 @@ public:
 		return s_Instance;
 	}
 	std::vector<Layer> GetMapLayers() { return mapLayers; }
+	MapDetails GetMapDetails() { return mapDetails; }
+	int GetMapHeight() { return mapDetails.mapHeight; }
+	int GetMapWidth() { return mapDetails.mapWidth; }
 private:
 	GameMap();
 	static GameMap* s_Instance;
 	std::vector<Layer> mapLayers;
+	MapDetails mapDetails;
 };
 #endif

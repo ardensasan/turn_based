@@ -3,6 +3,7 @@
 #include "../Camera.h"
 #include "../../Graphics/TextureManager.h"
 #include "../../Core/Engine.h"
+#include "../../Map/GameMap.h"
 Cursor::Cursor(int x, int y){
 	cursorRect.x = x;
 	cursorRect.y = y;
@@ -10,6 +11,7 @@ Cursor::Cursor(int x, int y){
 	cursorRect.h = 32;
 	keyPressed = false;
 	keyPressTimer = 0;
+	pixelSize = 32;
 }
 
 void Cursor::Update() {
@@ -18,7 +20,7 @@ void Cursor::Update() {
 		!keyPressed) || (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
 		keyPressTimer > 10){
-		cursorRect.y -= 32;
+		cursorRect.y -= cursorRect.y > 0 ? pixelSize : 0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -34,7 +36,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
 		keyPressTimer > 10)
 	{
-		cursorRect.y += 32;
+		cursorRect.y += cursorRect.y < GameMap::GetInstance()->GetMapHeight()-pixelSize ? pixelSize : 0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -49,7 +51,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT)) &&
 		keyPressTimer > 10)
 	{
-		cursorRect.x -= 32;
+		cursorRect.x -= cursorRect.x > 0 ? pixelSize:0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}
@@ -65,7 +67,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT)) &&
 		keyPressTimer > 10)
 	{
-		cursorRect.x += 32;
+		cursorRect.x += cursorRect.x < GameMap::GetInstance()->GetMapWidth()-pixelSize ? pixelSize : 0;
 		keyPressed = true;
 		keyPressTimer = 0;
 	}

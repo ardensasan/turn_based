@@ -42,6 +42,7 @@ void MapParser::Parse(std::string source) {
 	}
 	else {
 		std::vector<Tileset> _tilesets;
+		MapDetails mapDetails;
 		tinyxml2::XMLElement* root = xml.RootElement();
 		if (root->Value() == std::string("map")) { //get map and tile size
 			mapDetails.mapWidth = root->Attribute("width") ? atoi(root->Attribute("width")) : NULL;
@@ -50,6 +51,10 @@ void MapParser::Parse(std::string source) {
 			mapDetails.tileHeight = root->Attribute("tileheight") ? atoi(root->Attribute("tileheight")) : NULL;
 			if (!mapDetails.mapWidth || !mapDetails.mapHeight || !mapDetails.tileWidth || !mapDetails.tileHeight)
 				Error();
+			std::cout << mapDetails.mapHeight;
+			mapDetails.mapHeight *= mapDetails.tileHeight;
+			mapDetails.mapWidth *= mapDetails.tileWidth;
+			GameMap::GetInstance()->mapDetails = mapDetails;
 		}
 		for (tinyxml2::XMLElement* e = root->FirstChildElement();e != nullptr;e = e->NextSiblingElement()) { // get tileset details
 			if (e->Value() == std::string("tileset"))

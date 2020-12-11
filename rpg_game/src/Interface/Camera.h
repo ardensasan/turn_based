@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 #include <SDL.h>
-#include "../Map/MapParser.h"
+#include "../Map/GameMap.h"
 class Camera
 {
 public:
