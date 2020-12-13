@@ -150,6 +150,7 @@
     <ClInclude Include="src\Core\Timer.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
     <ClInclude Include="src\Input\InputListener.h" />
+    <ClInclude Include="src\Interface\Action\UnitAction.h" />
     <ClInclude Include="src\Interface\Camera.h" />
     <ClInclude Include="src\Interface\Menu\MainMenu.h" />
     <ClInclude Include="src\Interface\Menu\Settings.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\Core\Timer.cpp" />
     <ClCompile Include="src\Graphics\TextureManager.cpp" />
     <ClCompile Include="src\Input\InputListener.cpp" />
+    <ClCompile Include="src\Interface\Action\UnitAction.cpp" />
     <ClCompile Include="src\Interface\Camera.cpp" />
     <ClCompile Include="src\Interface\Cursor\Cursor.cpp" />
     <ClCompile Include="src\Interface\Cursor\Cursor.h" />
