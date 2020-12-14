@@ -36,6 +36,7 @@ void UnitAction::Update() {
 		keyPressed = true;
 		if (actionList[currentChoice] == "Move") {
 			isMoveSelected = true;
+			currentChoice++;
 		}
 		else if (actionList[currentChoice] == "Skill") {
 			//skill menu here
@@ -47,7 +48,12 @@ void UnitAction::Update() {
 	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) ||
 		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
 		!keyPressed) {
-		currentChoice = currentChoice > int(actionList.size() - 2) ? 0 : currentChoice + 1;
+		if (currentChoice > int(actionList.size() - 2)) {
+			currentChoice = hasMoved ? 1 : 0;
+		}
+		else {
+			currentChoice++;
+		}
 		keyPressed = true;
 	}
 	if ((InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_S) ||
@@ -59,7 +65,12 @@ void UnitAction::Update() {
 	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
 		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
 		!keyPressed) {
-		currentChoice = currentChoice < 1 ? actionList.size() - 1 : currentChoice - 1;
+		if (currentChoice < 1 || (hasMoved && currentChoice < 2)) {
+			currentChoice = actionList.size() - 1;
+		}
+		else {
+			currentChoice--;
+		}
 		keyPressed = true;
 	}
 	if ((InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_W) ||
@@ -79,13 +90,18 @@ void UnitAction::Render() {
 	std::vector<std::string>::iterator it;
 	int counter = 0;
 	for (it = actionList.begin();it != actionList.end();++it) {
-		SDL_Color color = (counter == currentChoice) ? colorList[1] : colorList[0]; // set red color for current choice or white color
-		textSurface = TTF_RenderText_Solid(font, it->c_str(), color);
-		texture = SDL_CreateTextureFromSurface(renderer, textSurface);
-		SDL_RenderCopy(renderer, texture, NULL, &rect);
-		rect.y += rect.h + 4;
-		SDL_DestroyTexture(texture);
-		SDL_FreeSurface(textSurface);
+		if (*it == "Move" && hasMoved) {
+			//dont display move command
+		}
+		else {
+			SDL_Color color = (counter == currentChoice) ? colorList[1] : colorList[0]; // set red color for current choice or white color
+			textSurface = TTF_RenderText_Solid(font, it->c_str(), color);
+			texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+			SDL_RenderCopy(renderer, texture, NULL, &rect);
+			rect.y += rect.h + 4;
+			SDL_DestroyTexture(texture);
+			SDL_FreeSurface(textSurface);
+		}
 		counter++;
 	}
 	return;
