@@ -8,6 +8,7 @@
 #include "../Map/TileParser.h"
 #include "../Interface/Camera.h"
 #include "../Interface/Cursor/Cursor.h"
+#include "../Interface/Menu/UnitAction.h"
 Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
@@ -66,7 +67,12 @@ void Engine::SetGameState(int i) {
 void Engine::Update() {
 	if (gameState == 0) { // in game
 		player->Update();
-		Cursor::GetInstance()->Update();
+		if (UnitAction::GetInstance()->IsInActionMenu() && !UnitAction::GetInstance()->IsMoveSelected()) {
+			UnitAction::GetInstance()->Update();
+		}
+		else {
+			Cursor::GetInstance()->Update();
+		}
 	}
 	else if (gameState == 1) // main menu
 		MainMenu::GetInstance()->Update();
@@ -86,7 +92,12 @@ void Engine::Render() {
 	if (gameState == 0) {  // in game
 		TileParser::GetInstance()->Render();
 		player->Render();
-		Cursor::GetInstance()->Render();
+		if (UnitAction::GetInstance()->IsInActionMenu() && !UnitAction::GetInstance()->IsMoveSelected()) {
+			UnitAction::GetInstance()->Render();
+		}
+		else {
+			Cursor::GetInstance()->Render();
+		}
 	}
 	else if (gameState == 1)  // main menu
 		MainMenu::GetInstance()->Render();
