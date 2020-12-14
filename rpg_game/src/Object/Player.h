@@ -3,7 +3,6 @@
 #include "GameObject.h"
 #include "Animation.h"
 #include "Position2D.h"
-#include "../Interface/Action/UnitAction.h"
 class Player : public GameObject
 {
 public:
@@ -18,7 +17,6 @@ private:
 	bool keyPressed;
 	bool moveSelected; //move is selected in the list of unit actions
 	bool skillSelected; //skill is selected in the list of unit actions
-	UnitAction* unitAction;
 };
 #endif
 

@@ -150,10 +150,10 @@
     <ClInclude Include="src\Core\Timer.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
     <ClInclude Include="src\Input\InputListener.h" />
-    <ClInclude Include="src\Interface\Action\UnitAction.h" />
     <ClInclude Include="src\Interface\Camera.h" />
     <ClInclude Include="src\Interface\Menu\MainMenu.h" />
     <ClInclude Include="src\Interface\Menu\Settings.h" />
+    <ClInclude Include="src\Interface\Menu\UnitAction.h" />
     <ClInclude Include="src\Map\GameMap.h" />
     <ClInclude Include="src\Map\MapParser.h" />
     <ClInclude Include="src\Map\TileParser.h" />
@@ -168,12 +168,12 @@
     <ClCompile Include="src\Core\Timer.cpp" />
     <ClCompile Include="src\Graphics\TextureManager.cpp" />
     <ClCompile Include="src\Input\InputListener.cpp" />
-    <ClCompile Include="src\Interface\Action\UnitAction.cpp" />
     <ClCompile Include="src\Interface\Camera.cpp" />
     <ClCompile Include="src\Interface\Cursor\Cursor.cpp" />
     <ClCompile Include="src\Interface\Cursor\Cursor.h" />
     <ClCompile Include="src\Interface\Menu\MainMenu.cpp" />
     <ClCompile Include="src\Interface\Menu\Settings.cpp" />
+    <ClCompile Include="src\Interface\Menu\UnitAction.cpp" />
     <ClCompile Include="src\Map\GameMap.cpp" />
     <ClCompile Include="src\Map\MapParser.cpp" />
     <ClCompile Include="src\Map\TileParser.cpp" />
