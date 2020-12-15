@@ -92,7 +92,7 @@ void Engine::Render() {
 	if (gameState == 0) {  // in game
 		TileParser::GetInstance()->Render();
 		player->Render();
-		if (UnitAction::GetInstance()->IsInActionMenu() && !UnitAction::GetInstance()->IsMoveSelected()) {
+		if (UnitAction::GetInstance()->IsInActionMenu() && !UnitAction::GetInstance()->IsMoveSelected() && !UnitAction::GetInstance()->IsSkillSelected()) {
 			UnitAction::GetInstance()->Render();
 		}
 		else {

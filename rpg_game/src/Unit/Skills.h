@@ -7,6 +7,7 @@ class Skills
 {
 public:
 	Skills();
+	bool IsSkillSelected() { return isSkillSelected; }
 	void Update();
 	void Render();
 private:

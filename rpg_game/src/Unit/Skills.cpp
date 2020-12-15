@@ -1,5 +1,5 @@
 #include "Skills.h"
-
+#include "../Input/InputListener.h"
 Skills::Skills() {
 	currentChoice = 0;
 	fontFile = "Assets/Fonts/Ancient Modern Tales.otf";
@@ -8,12 +8,35 @@ Skills::Skills() {
 	currentChoice = 0;
 	colorList = { {255, 255, 255} , {255, 0, 0} };
 	keyPressed = true;
-	skillList = { "Attack" };
+	skillList = { "Attack" , "Cancel"};
 	return;
 }
 
 void Skills::Update() {
+	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) ||
+		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
+		!keyPressed) {
+		currentChoice = currentChoice > int(skillList.size() - 2) ? 0 : currentChoice + 1;
+		keyPressed = true;
+	}
 
+	if ((InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_S) ||
+		InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_DOWN))
+		&& keyPressed) {
+		keyPressed = false;
+	}
+
+	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
+		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
+		!keyPressed) {
+		currentChoice = currentChoice < 1 ? skillList.size() - 1 : currentChoice - 1;
+		keyPressed = true;
+	}
+	if ((InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_W) ||
+		InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_UP)) &&
+		keyPressed) {
+		keyPressed = false;
+	}
 }
 
 void Skills::Render() {

@@ -17,8 +17,6 @@ private:
 	Position2D position;
 	bool isSelected; //unit is selected
 	bool keyPressed;
-	bool moveSelected; //move is selected in the list of unit actions
-	bool skillSelected; //skill is selected in the list of unit actions
 	bool isTurnEnded; //unit turn ended
 	Skills* skills;
 };

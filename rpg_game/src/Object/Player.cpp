@@ -9,8 +9,6 @@ Player::Player(){
 	animation = new Animation("fighter4");
 	isSelected = false;
 	keyPressed = false;
-	moveSelected = false;
-	skillSelected = false;
 	isTurnEnded = false;
 	skills = new Skills();
 }
@@ -18,8 +16,6 @@ Player::Player(){
 void Player::Reset() {
 	isSelected = false;
 	keyPressed = false;
-	moveSelected = false;
-	skillSelected = false;
 	isTurnEnded = false;
 }
 
@@ -50,8 +46,7 @@ void Player::Update() {
 		}
 		else if (UnitAction::GetInstance()->IsSkillSelected()) {
 			// skill menu
-			skillSelected = true;
-			std::cout << "yawa";
+			skills->Update();
 		}
 		if (UnitAction::GetInstance()->IsEndSelected()) {
 			isSelected = false;
@@ -72,8 +67,8 @@ void Player::Update() {
 
 void Player::Render() {
 	animation->Render(position.x, position.y);
-	if (skillSelected) {
-
+	if (isSelected && UnitAction::GetInstance()->IsSkillSelected()) {
+		skills->Render();
 	}
 }
 void Player::Clean() {
