@@ -11,10 +11,20 @@ Player::Player(){
 	keyPressed = false;
 	moveSelected = false;
 	skillSelected = false;
+	isTurnEnded = false;
+	skills = new Skills();
+}
+
+void Player::Reset() {
+	isSelected = false;
+	keyPressed = false;
+	moveSelected = false;
+	skillSelected = false;
+	isTurnEnded = false;
 }
 
 void Player::Update() {
-	if (!isSelected) {
+	if (!isSelected && !isTurnEnded) {
 		if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 			Position2D cursorPosition = Cursor::GetInstance()->GetCursorPosition();
 			if (position.x == cursorPosition.x && position.y == cursorPosition.y) {
@@ -45,6 +55,7 @@ void Player::Update() {
 			isSelected = false;
 			UnitAction::GetInstance()->ResetState();
 			keyPressed = true;
+			isTurnEnded = true;
 			//turn ended
 		}
 	}

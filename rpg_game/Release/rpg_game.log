@@ -1,24 +1,9 @@
-﻿  Main.cpp
-  Engine.cpp
-  Timer.cpp
-  TextureManager.cpp
-  InputListener.cpp
-  Camera.cpp
-  Cursor.cpp
-  Cursor.h
-  MainMenu.cpp
-  Settings.cpp
-  UnitAction.cpp
-  GameMap.cpp
-  MapParser.cpp
-  TileParser.cpp
-  Animation.cpp
+﻿  Engine.cpp
   Player.cpp
-  Position2D.h
-  tinyxml2.cpp
 Release\Cursor.obj : warning LNK4042: object specified more than once; extras ignored
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 1176 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 1178 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   rpg_game.vcxproj -> D:\Dev\turn_based\Release\turn_based.exe
