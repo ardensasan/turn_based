@@ -50,6 +50,8 @@ void Player::Update() {
 		}
 		else if (UnitAction::GetInstance()->IsSkillSelected()) {
 			// skill menu
+			skillSelected = true;
+			std::cout << "yawa";
 		}
 		if (UnitAction::GetInstance()->IsEndSelected()) {
 			isSelected = false;
@@ -70,6 +72,9 @@ void Player::Update() {
 
 void Player::Render() {
 	animation->Render(position.x, position.y);
+	if (skillSelected) {
+
+	}
 }
 void Player::Clean() {
 	return;

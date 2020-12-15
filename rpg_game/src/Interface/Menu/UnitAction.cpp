@@ -39,7 +39,7 @@ void UnitAction::Update() {
 			currentChoice++;
 		}
 		else if (actionList[currentChoice] == "Skill") {
-			//skill menu here
+			isSkillSelected = true;
 		}
 		else if (actionList[currentChoice] == "End") {
 			isEndSelected = true;
