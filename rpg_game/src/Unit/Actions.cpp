@@ -18,7 +18,7 @@ Actions::Actions() {
 }
 
 void Actions::Update() {
-	if (!moveSelected) {
+	if (!moveSelected && !skillSelected && !turnEnded) {
 		if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 			keyPressed = true;
 			if (actionList[currentChoice] == "Move") {
@@ -26,7 +26,7 @@ void Actions::Update() {
 				Cursor::GetInstance()->SetMoveSelected(true);
 			}
 			else if (actionList[currentChoice] == "Skill") {
-
+				skillSelected = true;
 			}
 			else if (actionList[currentChoice] == "End") {
 				turnEnded = true;
@@ -67,6 +67,7 @@ void Actions::Update() {
 			hasMoved = true;
 			moveSelected = false;
 			Cursor::GetInstance()->SetMoveSelected(false);
+			currentChoice = 1;
 		}
 		if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
 			keyPressed = false;

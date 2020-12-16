@@ -8,7 +8,8 @@ public:
 	Actions();
 	bool HasMoved() { return hasMoved; }
 	bool TurnEnded() { return turnEnded; }
-	bool MoveSelected() { return moveSelected; }
+	bool MoveSelected() { return moveSelected; } // move action selected
+	bool SkillSelected() { return skillSelected; } // skill action selected
 	void Update();
 	void Render();
 private:

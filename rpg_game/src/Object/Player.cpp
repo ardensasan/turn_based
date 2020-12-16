@@ -42,7 +42,7 @@ void Player::Update() {
 		if (actions->TurnEnded()) {
 			turnEnded = true;
 			isSelected = false;
-			Cursor::GetInstance()->UnitSelected(false);
+			Cursor::GetInstance()->DeSelect();
 		}
 		//position = Cursor::GetInstance()->GetCursorPosition();
 		//if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
