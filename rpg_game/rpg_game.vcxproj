@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="src\Core\Engine.h" />
     <ClInclude Include="src\Core\Timer.h" />
+    <ClInclude Include="src\Core\TurnManager.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
     <ClInclude Include="src\Input\InputListener.h" />
     <ClInclude Include="src\Interface\Camera.h" />
