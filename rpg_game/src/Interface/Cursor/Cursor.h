@@ -14,7 +14,7 @@ public:
 	void Update();
 	void SetUnitSelected(bool b) { unitSelected = b; }
 	bool IsUnitSelected() { return unitSelected; }
-	void IsUnitSelected(bool b) { unitSelected = b; }
+	void UnitSelected(bool b) { unitSelected = b; }
 	void IsMoveSelect(bool b) { moveSelected = b; }
 	bool SelectPressed() { return selectPressed; }
 	void DeSelect(); // deselect unit

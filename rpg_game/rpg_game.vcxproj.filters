@@ -66,10 +66,10 @@
     <ClCompile Include="src\Object\Position2D.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Interface\Menu\UnitAction.cpp">
+    <ClCompile Include="src\Unit\Skills.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Unit\Skills.cpp">
+    <ClCompile Include="src\Unit\Actions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,10 +116,10 @@
     <ClInclude Include="src\Interface\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Interface\Menu\UnitAction.h">
+    <ClInclude Include="src\Unit\Skills.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Unit\Skills.h">
+    <ClInclude Include="src\Unit\Actions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

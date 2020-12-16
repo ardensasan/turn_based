@@ -153,13 +153,13 @@
     <ClInclude Include="src\Interface\Camera.h" />
     <ClInclude Include="src\Interface\Menu\MainMenu.h" />
     <ClInclude Include="src\Interface\Menu\Settings.h" />
-    <ClInclude Include="src\Interface\Menu\UnitAction.h" />
     <ClInclude Include="src\Map\GameMap.h" />
     <ClInclude Include="src\Map\MapParser.h" />
     <ClInclude Include="src\Map\TileParser.h" />
     <ClInclude Include="src\Object\Animation.h" />
     <ClInclude Include="src\Object\GameObject.h" />
     <ClInclude Include="src\Object\Player.h" />
+    <ClInclude Include="src\Unit\Actions.h" />
     <ClInclude Include="src\Unit\Skills.h" />
     <ClInclude Include="src\Vendor\tinyxml2.h" />
   </ItemGroup>
@@ -174,13 +174,13 @@
     <ClCompile Include="src\Interface\Cursor\Cursor.h" />
     <ClCompile Include="src\Interface\Menu\MainMenu.cpp" />
     <ClCompile Include="src\Interface\Menu\Settings.cpp" />
-    <ClCompile Include="src\Interface\Menu\UnitAction.cpp" />
     <ClCompile Include="src\Map\GameMap.cpp" />
     <ClCompile Include="src\Map\MapParser.cpp" />
     <ClCompile Include="src\Map\TileParser.cpp" />
     <ClCompile Include="src\Object\Animation.cpp" />
     <ClCompile Include="src\Object\Player.cpp" />
     <ClCompile Include="src\Object\Position2D.h" />
+    <ClCompile Include="src\Unit\Actions.cpp" />
     <ClCompile Include="src\Unit\Skills.cpp" />
     <ClCompile Include="src\Vendor\tinyxml2.cpp" />
   </ItemGroup>

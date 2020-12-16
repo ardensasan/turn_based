@@ -13,6 +13,20 @@ Skills::Skills() {
 }
 
 void Skills::Update() {
+	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
+		keyPressed = false;
+	}
+
+	if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
+		keyPressed = true;
+		if (skillList[currentChoice] == "Attack") {
+
+		}
+		else if (skillList[currentChoice] == "Cancel") {
+
+		}
+	}
+
 	if ((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) ||
 		InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
 		!keyPressed) {

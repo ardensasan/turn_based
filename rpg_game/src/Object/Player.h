@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "Position2D.h"
 #include "../Unit/Skills.h"
+#include "../Unit/Actions.h"
 class Player : public GameObject
 {
 public:
@@ -17,8 +18,9 @@ private:
 	Position2D position;
 	bool isSelected; //unit is selected
 	bool keyPressed;
-	bool isTurnEnded; //unit turn ended
+	bool turnEnded; //unit turn ended
 	Skills* skills;
+	Actions* actions;
 };
 #endif
 
