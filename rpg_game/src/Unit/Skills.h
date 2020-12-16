@@ -7,6 +7,7 @@ class Skills
 {
 public:
 	Skills();
+	void Reset();
 	void Update();
 	void SetSelected(bool b) { selected = b; }
 	bool Selected() { return selected; }

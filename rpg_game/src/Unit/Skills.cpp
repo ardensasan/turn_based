@@ -13,6 +13,11 @@ Skills::Skills() {
 	return;
 }
 
+void Skills::Reset() {
+	keyPressed = true;
+	currentChoice = 0;
+}
+
 void Skills::Update() {
 	if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
 		keyPressed = false;
