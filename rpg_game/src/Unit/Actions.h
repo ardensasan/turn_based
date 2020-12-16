@@ -8,6 +8,7 @@ public:
 	Actions();
 	bool HasMoved() { return hasMoved; }
 	bool TurnEnded() { return turnEnded; }
+	bool MoveSelected() { return moveSelected; }
 	void Update();
 	void Render();
 private:

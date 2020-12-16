@@ -35,6 +35,10 @@ void Player::Update() {
 	}
 	else if (isSelected) {
 		actions->Update();
+		if (Cursor::GetInstance()->MoveSelected()) {
+			Position2D cursorPosition = Cursor::GetInstance()->GetCursorPosition();
+			position = cursorPosition;
+		}
 		if (actions->TurnEnded()) {
 			turnEnded = true;
 			isSelected = false;

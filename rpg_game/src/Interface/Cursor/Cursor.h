@@ -15,7 +15,8 @@ public:
 	void SetUnitSelected(bool b) { unitSelected = b; }
 	bool IsUnitSelected() { return unitSelected; }
 	void UnitSelected(bool b) { unitSelected = b; }
-	void IsMoveSelect(bool b) { moveSelected = b; }
+	void SetMoveSelected(bool b) { moveSelected = b; }
+	bool MoveSelected() { return moveSelected; }
 	bool SelectPressed() { return selectPressed; }
 	void DeSelect(); // deselect unit
 	Position2D GetCursorPosition() { return position; }
