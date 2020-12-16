@@ -1,6 +1,7 @@
 #include "Actions.h"
 #include "../Input/InputListener.h"
 #include "../Interface/Cursor/Cursor.h"
+#include "../Object/ActionManager.h"
 Actions::Actions() {
 	currentChoice = 0;
 	fontFile = "Assets/Fonts/Ancient Modern Tales.otf";
@@ -28,18 +29,19 @@ void Actions::Reset() {
 }
 
 void Actions::Update() {
-	if (!moveSelected && !skillSelected && !turnEnded) {
 		if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 			keyPressed = true;
 			if (actionList[currentChoice] == "Move") {
 				moveSelected = true;
+				ActionManager::GetInstance()->SetMoveSelected(true);
 				Cursor::GetInstance()->SetMoveSelected(true);
 			}
 			else if (actionList[currentChoice] == "Skill") {
-				//skillSelected = true;
+				skillSelected = true;
 			}
 			else if (actionList[currentChoice] == "End") {
 				turnEnded = true;
+				ActionManager::GetInstance()->Reset();
 			}
 		}
 		if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
@@ -71,46 +73,32 @@ void Actions::Update() {
 		if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_S) && keyPressed) {
 			keyPressed = false;
 		}
-	}else if(moveSelected){
-		if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
-			keyPressed = true;
-			hasMoved = true;
-			moveSelected = false;
-			Cursor::GetInstance()->SetMoveSelected(false);
-			currentChoice = 1;
-		}
-		if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
-			keyPressed = false;
-		}
-	}
 	return;
 }
 
 void Actions::Render() {
-	if (!moveSelected) {
-		SDL_Surface* textSurface;
-		SDL_Texture* texture;
-		int textWidth = 30;
-		int textHeight = 20;
-		SDL_Renderer* renderer = Engine::GetInstance()->GetRenderer();
-		SDL_Rect rect = { 0, 0, textWidth, textHeight };
-		std::vector<std::string>::iterator it;
-		int counter = 0;
-		for (it = actionList.begin();it != actionList.end();++it) {
-			if (*it == "Move" && hasMoved) {
-				//dont display move command
-			}
-			else {
-				SDL_Color color = (counter == currentChoice) ? colorList[1] : colorList[0]; // set red color for current choice or white color
-				textSurface = TTF_RenderText_Solid(font, it->c_str(), color);
-				texture = SDL_CreateTextureFromSurface(renderer, textSurface);
-				SDL_RenderCopy(renderer, texture, NULL, &rect);
-				rect.y += rect.h + 4;
-				SDL_DestroyTexture(texture);
-				SDL_FreeSurface(textSurface);
-			}
-			counter++;
+	SDL_Surface* textSurface;
+	SDL_Texture* texture;
+	int textWidth = 30;
+	int textHeight = 20;
+	SDL_Renderer* renderer = Engine::GetInstance()->GetRenderer();
+	SDL_Rect rect = { 0, 0, textWidth, textHeight };
+	std::vector<std::string>::iterator it;
+	int counter = 0;
+	for (it = actionList.begin();it != actionList.end();++it) {
+		if (*it == "Move" && hasMoved) {
+			//dont display move command
 		}
+		else {
+			SDL_Color color = (counter == currentChoice) ? colorList[1] : colorList[0]; // set red color for current choice or white color
+			textSurface = TTF_RenderText_Solid(font, it->c_str(), color);
+			texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+			SDL_RenderCopy(renderer, texture, NULL, &rect);
+			rect.y += rect.h + 4;
+			SDL_DestroyTexture(texture);
+			SDL_FreeSurface(textSurface);
+		}
+		counter++;
 	}
 	return;
 }

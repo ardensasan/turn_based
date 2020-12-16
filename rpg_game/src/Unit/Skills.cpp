@@ -1,5 +1,6 @@
 #include "Skills.h"
 #include "../Input/InputListener.h"
+#include "../Object/ActionManager.h"
 Skills::Skills() {
 	currentChoice = 0;
 	fontFile = "Assets/Fonts/Ancient Modern Tales.otf";
@@ -23,7 +24,8 @@ void Skills::Update() {
 
 		}
 		else if (skillList[currentChoice] == "Cancel") {
-
+			currentChoice = 0;
+			ActionManager::GetInstance()->SetSkillSelected(false);
 		}
 	}
 
@@ -51,6 +53,7 @@ void Skills::Update() {
 		keyPressed) {
 		keyPressed = false;
 	}
+	return;
 }
 
 void Skills::Render() {

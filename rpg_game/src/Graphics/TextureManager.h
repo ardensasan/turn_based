@@ -7,7 +7,7 @@
 class TextureManager
 {
 public:
-	inline static TextureManager* GetInstance() {
+	static TextureManager* GetInstance() {
 		if (s_Instance == nullptr)
 			s_Instance = new TextureManager();
 		return s_Instance;

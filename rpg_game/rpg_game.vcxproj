@@ -157,6 +157,7 @@
     <ClInclude Include="src\Map\GameMap.h" />
     <ClInclude Include="src\Map\MapParser.h" />
     <ClInclude Include="src\Map\TileParser.h" />
+    <ClInclude Include="src\Object\ActionManager.h" />
     <ClInclude Include="src\Object\Animation.h" />
     <ClInclude Include="src\Object\GameObject.h" />
     <ClInclude Include="src\Object\Player.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="src\Map\GameMap.cpp" />
     <ClCompile Include="src\Map\MapParser.cpp" />
     <ClCompile Include="src\Map\TileParser.cpp" />
+    <ClCompile Include="src\Object\ActionManager.cpp" />
     <ClCompile Include="src\Object\Animation.cpp" />
     <ClCompile Include="src\Object\Player.cpp" />
     <ClCompile Include="src\Object\Position2D.h" />

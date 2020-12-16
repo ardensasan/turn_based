@@ -9,6 +9,7 @@
 #include "../Interface/Camera.h"
 #include "../Interface/Cursor/Cursor.h"
 #include "../Core/TurnManager.h"
+#include "../Object/ActionManager.h"
 std::vector<GameObject*> unitList;
 Player* player;
 Engine* Engine::s_Instance = nullptr;
@@ -72,7 +73,10 @@ void Engine::Update() {
 		for (it = unitList.begin();it != unitList.end();++it) {
 			(*it)->Update();
 		}
-		Cursor::GetInstance()->Update();
+		if ((ActionManager::GetInstance()->MoveSelected() && Cursor::GetInstance()->IsUnitSelected()) ||
+			!Cursor::GetInstance()->IsUnitSelected()) {
+			Cursor::GetInstance()->Update();
+		}
 		TurnManager::GetInstance()->Update(unitList);
 	}
 	else if (gameState == 1) // main menu

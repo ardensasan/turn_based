@@ -6,6 +6,7 @@ class Actions
 {
 public:
 	Actions();
+	void SetHasMoved(bool b) { hasMoved = b; currentChoice = 1; }
 	bool HasMoved() { return hasMoved; }
 	bool TurnEnded() { return turnEnded; }
 	bool MoveSelected() { return moveSelected; } // move action selected

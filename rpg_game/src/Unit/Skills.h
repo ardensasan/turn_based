@@ -8,6 +8,8 @@ class Skills
 public:
 	Skills();
 	void Update();
+	void SetSelected(bool b) { selected = b; }
+	bool Selected() { return selected; }
 	void Render();
 private:
 	std::vector<std::string> skillList;
@@ -17,5 +19,6 @@ private:
 	int fontSize;
 	std::string fontFile;
 	bool keyPressed;
+	bool selected; // skill is selected
 };
 #endif
