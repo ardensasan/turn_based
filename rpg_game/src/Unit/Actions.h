@@ -10,6 +10,7 @@ public:
 	bool TurnEnded() { return turnEnded; }
 	bool MoveSelected() { return moveSelected; } // move action selected
 	bool SkillSelected() { return skillSelected; } // skill action selected
+	void Reset(); // reset states
 	void Update();
 	void Render();
 private:

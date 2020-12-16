@@ -6,6 +6,8 @@ class GameObject
 public:
 	GameObject() {}
 	virtual void Update() {}
+	virtual bool HasTurnEnded() { return true; }
+	virtual void Reset(){}
 	virtual void Render(){}
 	virtual void Clean() {}
 };

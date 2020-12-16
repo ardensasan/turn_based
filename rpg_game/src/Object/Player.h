@@ -11,6 +11,7 @@ public:
 	Player();
 	void Update();
 	void Reset(); // reset the unit state
+	bool HasTurnEnded() { return turnEnded; }
 	void Render();
 	void Clean();
 private:

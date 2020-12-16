@@ -8,6 +8,8 @@
 #include "../Map/TileParser.h"
 #include "../Interface/Camera.h"
 #include "../Interface/Cursor/Cursor.h"
+#include "../Core/TurnManager.h"
+std::vector<GameObject*> unitList;
 Player* player;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
@@ -48,6 +50,7 @@ void Engine::Init() {
 			MapParser::GetInstance()->Load("samplemap");
 			Camera::GetInstance()->Set();
 			player = new Player();
+			unitList.push_back(player);
 		}
 	}
 	return;
@@ -65,8 +68,12 @@ void Engine::SetGameState(int i) {
 
 void Engine::Update() {
 	if (gameState == 0) { // in game
-		player->Update();
+		std::vector<GameObject*>::iterator it;
+		for (it = unitList.begin();it != unitList.end();++it) {
+			(*it)->Update();
+		}
 		Cursor::GetInstance()->Update();
+		TurnManager::GetInstance()->Update(unitList);
 	}
 	else if (gameState == 1) // main menu
 		MainMenu::GetInstance()->Update();
@@ -85,7 +92,11 @@ void Engine::Render() {
 	SDL_RenderClear(renderer);
 	if (gameState == 0) {  // in game
 		TileParser::GetInstance()->Render();
-		player->Render();
+		std::vector<GameObject*>::iterator it;
+		for (it = unitList.begin();it != unitList.end();++it) {
+			(*it)->Render();
+		}
+		TurnManager::GetInstance()->Render();
 		Cursor::GetInstance()->Render();
 	}
 	else if (gameState == 1)  // main menu

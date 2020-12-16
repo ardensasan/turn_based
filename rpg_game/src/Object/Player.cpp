@@ -15,12 +15,16 @@ Player::Player(){
 
 void Player::Reset() {
 	isSelected = false;
-	keyPressed = false;
+	keyPressed = true;
 	turnEnded = false;
+	actions->Reset();
 }
 
 void Player::Update() {
 	if (!isSelected && !turnEnded) {
+		if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
+			keyPressed = false;
+		}
 		if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 			Position2D cursorPosition = Cursor::GetInstance()->GetCursorPosition();
 			if (position.x == cursorPosition.x && position.y == cursorPosition.y) {
@@ -28,9 +32,6 @@ void Player::Update() {
 				isSelected = true;
 				Cursor::GetInstance()->UnitSelected(true);
 			}
-		}
-		if (InputListener::GetInstance()->GetKeyUp(SDL_SCANCODE_RETURN) && keyPressed) {
-			keyPressed = false;
 		}
 	}
 	else if (isSelected) {
