@@ -64,6 +64,33 @@ void TextureManager::DrawRect(int x, int y) {
 	return;
 }
 
+void TextureManager::DrawSkillRange(int x, int y, int range) {
+	SDL_Rect cameraRect = Camera::GetInstance()->GetCameraRect();
+	SDL_Rect rect = { x - cameraRect.x , y - cameraRect.y, pixelSize, pixelSize }; // left side
+	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 255, 255, 255);
+	for (int i = 0;i < range;i++) { // left side
+		rect.x -= pixelSize;
+		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &rect);
+	}
+	rect = { x - cameraRect.x , y - cameraRect.y, pixelSize, pixelSize }; // left side
+	for (int i = 0; i < range;i++) { // right side
+		rect.x += pixelSize;
+		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &rect);
+	}
+	rect = { x - cameraRect.x , y - cameraRect.y, pixelSize, pixelSize }; // left side
+	for (int i = 0; i < range;i++) { // up
+		rect.y -= pixelSize;
+		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &rect);
+	}
+	rect = { x - cameraRect.x , y - cameraRect.y, pixelSize, pixelSize }; // left side
+	for (int i = 0; i < range;i++) { // down
+		rect.y += pixelSize;
+		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &rect);
+	}
+	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 0);
+	return;
+}
+
 void TextureManager::CleanTilesets(std::string name) {
 	std::map<std::string, SDL_Texture*>::iterator it;
 	for (it = textureMap.begin();it != textureMap.end(); ++it) {

@@ -3,9 +3,16 @@
 #include "../Interface/Camera.h"
 #include "../Interface/Cursor/Cursor.h"
 #include "../Object/ActionManager.h"
-Player::Player(){
-	position.x = 0;
-	position.y = 0;
+Player::Player(int i){
+	if (i == 0) {
+		position.x = 0;
+		position.y = 0;
+	}
+	else {
+		position.x = 64;
+		position.y = 64;
+	}
+
 	animation = new Animation("fighter4");
 	isSelected = false;
 	keyPressed = false;
@@ -40,6 +47,7 @@ void Player::Update() {
 		if (ActionManager::GetInstance()->MoveSelected()) {
 			Position2D cursorPosition = Cursor::GetInstance()->GetCursorPosition();
 			position = cursorPosition;
+			ActionManager::GetInstance()->UpdatePosition(position);
 			if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 				keyPressed = true;
 				ActionManager::GetInstance()->Reset();
@@ -51,10 +59,12 @@ void Player::Update() {
 		}
 		else if (ActionManager::GetInstance()->SkillSelected()) {
 			skills->Update();
+			ActionManager::GetInstance()->UpdatePosition(position);
 		}
 		else if(actions->TurnEnded()){
 			isSelected = false;
 			turnEnded = true;
+			ActionManager::GetInstance()->Reset();
 			Cursor::GetInstance()->DeSelect();
 		}
 		else {
@@ -67,11 +77,13 @@ void Player::Update() {
 
 void Player::Render() {
 	animation->Render(position.x, position.y);
-	if (isSelected && !ActionManager::GetInstance()->MoveSelected() && !ActionManager::GetInstance()->SkillSelected()) {
-		actions->Render();
-	}
-	else if (ActionManager::GetInstance()->SkillSelected()) {
-		skills->Render();
+	if (isSelected) {
+		if (!ActionManager::GetInstance()->MoveSelected() && !ActionManager::GetInstance()->SkillSelected()) {
+			actions->Render();
+		}
+		else if (ActionManager::GetInstance()->SkillSelected()) {
+			skills->Render();
+		}
 	}
 }
 void Player::Clean() {

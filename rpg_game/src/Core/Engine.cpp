@@ -12,6 +12,7 @@
 #include "../Object/ActionManager.h"
 std::vector<GameObject*> unitList;
 Player* player;
+Player* player2;
 Engine* Engine::s_Instance = nullptr;
 Engine::Engine() {
 	window = nullptr;
@@ -50,8 +51,10 @@ void Engine::Init() {
 			TextureManager::GetInstance()->LoadTextures();
 			MapParser::GetInstance()->Load("samplemap");
 			Camera::GetInstance()->Set();
-			player = new Player();
+			player = new Player(0);
+			player2 = new Player(1);
 			unitList.push_back(player);
+			unitList.push_back(player2);
 		}
 	}
 	return;

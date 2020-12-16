@@ -8,7 +8,7 @@
 class Player : public GameObject
 {
 public:
-	Player();
+	Player(int i);
 	void Update();
 	void Reset(); // reset the unit state
 	bool HasTurnEnded() { return turnEnded; }

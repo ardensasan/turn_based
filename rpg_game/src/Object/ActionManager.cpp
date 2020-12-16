@@ -10,8 +10,15 @@ ActionManager::ActionManager() {
 void ActionManager::Reset() {
 	moveSelected = false;
 	skillSelected = false;
+	skill.name = "";
+	skill.range = NULL;
 }
 
-void ActionManager::Update() {
+void ActionManager::UpdatePosition(Position2D unitPosition) {
+	this->unitPosition = unitPosition;
+}
 
+
+void ActionManager::SetSkillDetails(Skill skill) {
+	this->skill = skill;
 }

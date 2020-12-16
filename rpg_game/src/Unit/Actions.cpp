@@ -32,12 +32,11 @@ void Actions::Update() {
 		if (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && !keyPressed) {
 			keyPressed = true;
 			if (actionList[currentChoice] == "Move") {
-				moveSelected = true;
 				ActionManager::GetInstance()->SetMoveSelected(true);
 				Cursor::GetInstance()->SetMoveSelected(true);
 			}
 			else if (actionList[currentChoice] == "Skill") {
-				skillSelected = true;
+				ActionManager::GetInstance()->SetSkillSelected(true);
 			}
 			else if (actionList[currentChoice] == "End") {
 				turnEnded = true;

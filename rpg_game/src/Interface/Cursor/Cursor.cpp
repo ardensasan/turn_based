@@ -23,12 +23,13 @@ void Cursor::DeSelect() {
 	moveSelected = false;
 }
 void Cursor::Update() {
+	unsigned int maxTime = 5;
 	if (!unitSelected || (unitSelected && moveSelected)) {
 		if (((InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
 			!keyPressed) || (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_W) ||
 				InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)) &&
-			keyPressTimer > 10) {
+			keyPressTimer > maxTime) {
 			position.y -= position.y > 0 ? TextureManager::GetInstance()->GetPixelSize() : 0;
 			keyPressed = true;
 			keyPressTimer = 0;
@@ -43,7 +44,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
 			!keyPressed) || (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_S) ||
 				InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)) &&
-			keyPressTimer > 10)
+			keyPressTimer > maxTime)
 		{
 			position.y += position.y < GameMap::GetInstance()->GetMapHeight() - TextureManager::GetInstance()->GetPixelSize() ? TextureManager::GetInstance()->GetPixelSize() : 0;
 			keyPressed = true;
@@ -58,7 +59,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT)) &&
 			!keyPressed) || (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_A) ||
 				InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_LEFT)) &&
-			keyPressTimer > 10)
+			keyPressTimer > maxTime)
 		{
 			position.x -= position.x > 0 ? TextureManager::GetInstance()->GetPixelSize() : 0;
 			keyPressed = true;
@@ -74,7 +75,7 @@ void Cursor::Update() {
 			InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT)) &&
 			!keyPressed) || (InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_D) ||
 				InputListener::GetInstance()->GetKeyDown(SDL_SCANCODE_RIGHT)) &&
-			keyPressTimer > 10)
+			keyPressTimer > maxTime)
 		{
 			position.x += position.x < GameMap::GetInstance()->GetMapWidth() - TextureManager::GetInstance()->GetPixelSize() ? TextureManager::GetInstance()->GetPixelSize() : 0;
 			keyPressed = true;
